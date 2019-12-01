@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "config.oauth.public-key",
+      "type": "java.lang.String",
+      "description": "jwt access token verify key."
+    },
+    {
+      "name": "config.oauth.private-key",
+      "type": "java.lang.String",
+      "description": "jwt access token sign key."
+    }
+  ]
+}

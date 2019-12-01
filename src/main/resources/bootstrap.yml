@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: authorization-server
+  profiles:
+    active: dev
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+
+server:
+  port: 9000

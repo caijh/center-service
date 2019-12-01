@@ -1,0 +1,44 @@
+package com.github.caijh.authorizationserver.entity;
+
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.github.caijh.commons.base.PersistentObject;
+import lombok.Data;
+import org.hibernate.annotations.Type;
+
+@Entity
+@Data
+public class Resource implements PersistentObject<Long> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true)
+    private String name;
+
+    @Type(type = "json")
+    private List<Action> actions;
+
+    @Override
+    public Long getId() {
+        return this.id;
+    }
+
+    @Data
+    public static class Action implements Serializable {
+
+        private String name;
+        private String description;
+        private String url;
+        private String method;
+
+    }
+
+}
