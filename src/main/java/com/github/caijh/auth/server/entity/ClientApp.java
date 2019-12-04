@@ -35,6 +35,8 @@ public class ClientApp implements PersistentObject<String> {
     @Type(type = "json")
     private Set<String> scope;
     @Type(type = "json")
+    private Set<String> autoApproveScope;
+    @Type(type = "json")
     private Set<String> resourceIds;
     @Type(type = "json")
     private Set<String> authorities;

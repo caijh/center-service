@@ -18,10 +18,6 @@ public class ClientAppDetails implements ClientDetails {
         this.clientApp = clientApp;
     }
 
-    public ClientApp getClientApp() {
-        return clientApp;
-    }
-
     @Override
     public String getClientId() {
         return clientApp.getClientId();
@@ -82,7 +78,7 @@ public class ClientAppDetails implements ClientDetails {
 
     @Override
     public boolean isAutoApprove(String scope) {
-        return false;
+        return !clientApp.getAutoApproveScope().isEmpty() && clientApp.getAutoApproveScope().contains(scope);
     }
 
     @Override
