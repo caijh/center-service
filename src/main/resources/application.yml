@@ -1,4 +1,13 @@
+debug: true
+
 spring:
+  aop:
+    proxy-target-class: true
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/clientdb?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: none
@@ -6,16 +15,11 @@ spring:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
     properties:
       hibernate.jdbc.lob.non_contextual_creation: true
-      hibernate.dialect: com.github.caijh.authorizationserver.config.mysql.CustomMySQLDialect
-  aop:
-    proxy-target-class: true
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_SERVER_ADDRESSES:http://localhost:8761/eureka/}
-    register-with-eureka: true
-    fetch-registry: true
+      hibernate.dialect: com.github.caijh.auth.server.config.mysql.CustomMySQLDialect
+  redis:
+    host: 10.38.2.12
+    port: 30085
+    database: 0
 
 config:
   oauth:
