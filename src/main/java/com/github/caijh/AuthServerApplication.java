@@ -8,10 +8,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories
 @SpringBootApplication
 @EnableDiscoveryClient
-public class AuthorizationServerApplication {
+public class AuthServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AuthorizationServerApplication.class, args);
+        SpringApplication.run(AuthServerApplication.class, args);
     }
 
 }
