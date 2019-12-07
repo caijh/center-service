@@ -17,8 +17,8 @@ spring:
       hibernate.jdbc.lob.non_contextual_creation: true
       hibernate.dialect: com.github.caijh.auth.server.config.mysql.CustomMySQLDialect
   redis:
-    host: 10.38.2.12
-    port: 30085
+    host: 127.0.0.1
+    port: 6379
     database: 0
 
 config:

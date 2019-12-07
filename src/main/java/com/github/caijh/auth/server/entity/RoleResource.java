@@ -1,10 +1,11 @@
 package com.github.caijh.auth.server.entity;
 
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import com.github.caijh.commons.base.PersistentObject;
 import lombok.Data;
@@ -18,12 +19,16 @@ public class RoleResource implements PersistentObject<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long roleId;
-    private Long resourceId;
+    @OneToOne
+    private Role role;
+
+    @OneToOne
+    private Resource resource;
+
     /**
      * 该角色对此资源可做操作.
      */
     @Type(type = "json")
-    private List<String> actionNames;
+    private Set<String> actionNames;
 
 }

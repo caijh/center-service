@@ -13,14 +13,20 @@ import static java.util.stream.Collectors.toList;
 
 public class ClientUserDetails implements UserDetails {
 
+    private String appId;
     private User user;
 
-    public ClientUserDetails(User user) {
+    public ClientUserDetails(String appId, User user) {
+        this.appId = appId;
         this.user = user;
     }
 
     public User getUser() {
         return user;
+    }
+
+    public String getAppId() {
+        return appId;
     }
 
     @Override

@@ -5,11 +5,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 
-import com.github.caijh.auth.server.repository.ClientAppRepository;
 import com.github.caijh.auth.server.entity.ClientApp;
 import com.github.caijh.auth.server.entity.ClientUserDetails;
 import com.github.caijh.auth.server.entity.Role;
 import com.github.caijh.auth.server.entity.User;
+import com.github.caijh.auth.server.repository.ClientAppRepository;
 import com.github.caijh.auth.server.repository.RoleRepository;
 import com.github.caijh.auth.server.repository.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -53,7 +53,7 @@ public class ClientUserDetailsServiceImpl implements UserDetailsService {
         List<Role> roles = roleRepository.findByAppIdAndUserId(clientApp.getId(), user.getId());
         user.setRoles(roles);
 
-        return new ClientUserDetails(user);
+        return new ClientUserDetails(clientId, user);
     }
 
 }
