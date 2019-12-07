@@ -1,5 +1,6 @@
 package com.github.caijh.auth.server.aop;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,14 +33,14 @@ public class AccessTokenAspect {
 
     @AfterReturning(pointcut = "postAccessToken()", returning = "result")
     public void afterReturning(JoinPoint joinPoint, Object result) {
-        String respBody = JSON.toJSONString(result);
-        JSONObject additionalInformation = JSON.parseObject(respBody).getJSONObject("body").getJSONObject("additionalInformation");
+        JSONObject body = JSON.parseObject(JSON.toJSONString(result)).getJSONObject("body");
+        JSONObject additionalInformation = body.getJSONObject("additionalInformation");
         String appId = additionalInformation.getString("appId");
         Long userId = additionalInformation.getLong("userId");
-        prepareAuth(appId, userId);
+        prepareAuth(appId, userId, body.getLong("expiration"));
     }
 
-    private void prepareAuth(String appId, Long userId) {
+    private void prepareAuth(String appId, Long userId, Long expiration) {
         List<ResourceSelected> selectedResources = resourceService.findResourceSelected(appId, userId);
         Set<String> codes = new HashSet<>();
         selectedResources.forEach(e -> {
@@ -47,7 +48,10 @@ public class AccessTokenAspect {
             e.getActionNames().forEach(action -> codes.add(name + ":" + action));
         });
 
-        redisTemplate.opsForSet().add("AUTH:" + userId, codes);
+        String key = "AUTH:" + appId + ":" + userId;
+        redisTemplate.delete(key);
+        redisTemplate.opsForSet().add(key, codes);
+        redisTemplate.expireAt(key, new Date(expiration));
     }
 
 }
