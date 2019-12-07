@@ -12,9 +12,12 @@ import com.github.caijh.auth.server.repository.RoleRepository;
 import com.github.caijh.auth.server.repository.RoleResourceRepository;
 import com.github.caijh.auth.server.service.ResourceService;
 import com.github.caijh.auth.server.vo.ResourceSelected;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
+@CacheConfig(cacheNames = "ResourceServiceImpl")
 public class ResourceServiceImpl implements ResourceService {
 
     @Inject
@@ -22,6 +25,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Inject
     private RoleResourceRepository roleResourceRepository;
 
+    @Cacheable
     @Override
     public List<ResourceSelected> findResourceSelected(String appId, Long userId) {
         List<Role> roles = roleRepository.findByAppIdAndUserId(appId, userId);
