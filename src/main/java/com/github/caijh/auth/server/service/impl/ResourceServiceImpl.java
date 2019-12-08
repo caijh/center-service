@@ -29,15 +29,18 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public List<ResourceSelected> findResourceSelected(String appId, Long userId) {
         List<Role> roles = roleRepository.findByAppIdAndUserId(appId, userId);
-        List<RoleResource> roleResources = roleResourceRepository.findByRoleIn(roles);
         List<ResourceSelected> selectedResources = new ArrayList<>();
-        roleResources.stream().collect(Collectors.groupingBy(RoleResource::getResource)).forEach((k, v) -> {
-            ResourceSelected selected = new ResourceSelected();
-            selected.setResource(k);
-            selected.setActionNames(new HashSet<>());
-            v.forEach(e -> selected.getActionNames().addAll(e.getActionNames()));
-            selectedResources.add(selected);
-        });
+        roleResourceRepository.findByRoleIn(roles)
+                              .stream()
+                              .collect(Collectors.groupingBy(RoleResource::getResource))
+                              .forEach((k, v) -> {
+                                  ResourceSelected selected = new ResourceSelected();
+                                  selected.setResource(k);
+                                  selected.setActionNames(new HashSet<>());
+                                  v.forEach(e -> selected.getActionNames().addAll(e.getActionNames()));
+                                  selectedResources.add(selected);
+                              });
+
         return selectedResources;
     }
 
