@@ -50,7 +50,7 @@ public class AccessTokenAspect {
 
         String key = "AUTH:" + appId + ":" + userId;
         redisTemplate.delete(key);
-        redisTemplate.opsForSet().add(key, codes);
+        redisTemplate.opsForSet().add(key, codes.toArray(new String[]{}));
         redisTemplate.expireAt(key, new Date(expiration));
     }
 
