@@ -37,10 +37,10 @@ public class AccessTokenAspect {
         JSONObject additionalInformation = body.getJSONObject("additionalInformation");
         String appId = additionalInformation.getString("appId");
         Long userId = additionalInformation.getLong("userId");
-        prepareAuth(appId, userId, body.getLong("expiration"));
+        cache4NextAuth(appId, userId, body.getLong("expiration"));
     }
 
-    private void prepareAuth(String appId, Long userId, Long expiration) {
+    private void cache4NextAuth(String appId, Long userId, Long expiration) {
         List<ResourceSelected> selectedResources = resourceService.findResourceSelected(appId, userId);
         Set<String> codes = new HashSet<>();
         selectedResources.forEach(e -> {

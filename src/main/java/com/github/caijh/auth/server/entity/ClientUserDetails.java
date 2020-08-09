@@ -3,7 +3,7 @@ package com.github.caijh.auth.server.entity;
 import java.util.Collection;
 
 import com.github.caijh.auth.server.enums.UserStatusEnum;
-import com.github.caijh.commons.base.IndexEnum;
+import com.github.caijh.commons.base.enums.IndexEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.CollectionUtils;

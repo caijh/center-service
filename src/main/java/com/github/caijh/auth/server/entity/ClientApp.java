@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import com.github.caijh.auth.server.enums.AuthorizedGrantType;
+import com.github.caijh.auth.server.enums.AuthorizedGrantTypeEnum;
 import com.github.caijh.commons.base.PersistentObject;
 import lombok.Data;
 import org.hibernate.annotations.Type;
@@ -24,7 +24,7 @@ public class ClientApp implements PersistentObject<String> {
     /**
      * 支持的认证类型.
      *
-     * @see AuthorizedGrantType
+     * @see AuthorizedGrantTypeEnum
      */
     @Type(type = "json")
     private Set<String> authorizedGrantTypes;

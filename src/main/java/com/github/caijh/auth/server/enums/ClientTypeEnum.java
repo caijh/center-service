@@ -1,6 +1,7 @@
 package com.github.caijh.auth.server.enums;
 
-import com.github.caijh.commons.base.IndexEnum;
+
+import com.github.caijh.commons.base.enums.IndexEnum;
 
 public enum ClientTypeEnum implements IndexEnum {
     PUBLIC(0, "公开的"),
