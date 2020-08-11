@@ -5,8 +5,9 @@
 
     <parent>
         <groupId>com.github.caijh</groupId>
-        <artifactId>service-parent</artifactId>
-        <version>2.3.2.RELEASE</version>
+        <artifactId>framework-parent</artifactId>
+        <version>2.3.2-SNAPSHOT</version>
+        <relativePath/>
     </parent>
 
     <artifactId>auth-server</artifactId>
@@ -15,6 +16,10 @@
 
     <name>auth-server</name>
     <description>auth-server</description>
+
+    <properties>
+        <framework.version>2.3.2-SNAPSHOT</framework.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -30,16 +35,7 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -64,14 +60,9 @@
         </dependency>
 
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.17</version>
-        </dependency>
-        <dependency>
-            <groupId>com.vladmihalcea</groupId>
-            <artifactId>hibernate-types-52</artifactId>
-            <version>2.9.13</version>
+            <groupId>com.github.caijh</groupId>
+            <artifactId>framework-orm</artifactId>
+            <version>${framework.version}</version>
         </dependency>
     </dependencies>
 
@@ -86,5 +77,18 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>sonatype-nexus-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 </project>
