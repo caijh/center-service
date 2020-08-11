@@ -16,6 +16,7 @@ CREATE TABLE `client_app`
     `refresh_token_validity_seconds` int(11)      NULL DEFAULT NULL COMMENT 'refresh token的有效期',
     `resource_ids`                   json         NULL COMMENT '可以访问的资源id集合',
     `scope`                          json         NULL COMMENT '作用域',
+    `auto_approve_scope`             json         NULL COMMENT '自动作用域',
     PRIMARY KEY (`client_id`) USING BTREE,
     UNIQUE INDEX `uk_client_name` (`client_name`) USING BTREE
 ) ENGINE = InnoDB
