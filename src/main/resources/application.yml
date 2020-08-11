@@ -15,7 +15,7 @@ spring:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
     properties:
       hibernate.jdbc.lob.non_contextual_creation: true
-      hibernate.dialect: com.github.caijh.auth.server.config.mysql.CustomMySQLDialect
+      hibernate.dialect: com.github.caijh.framework.orm.mysql.CustomMySqlDialect
   redis:
     host: 127.0.0.1
     port: 6379
