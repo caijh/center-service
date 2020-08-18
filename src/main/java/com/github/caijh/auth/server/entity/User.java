@@ -1,6 +1,5 @@
 package com.github.caijh.auth.server.entity;
 
-import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,13 +8,16 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.caijh.framework.orm.model.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Entity
-public class User implements Serializable {
+public class User extends BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

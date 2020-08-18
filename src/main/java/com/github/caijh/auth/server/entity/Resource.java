@@ -8,13 +8,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.github.caijh.commons.base.PersistentObject;
+import com.github.caijh.framework.orm.model.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Type;
 
 @Entity
 @Data
-public class Resource implements PersistentObject<Long> {
+@EqualsAndHashCode(callSuper = false)
+public class Resource extends BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

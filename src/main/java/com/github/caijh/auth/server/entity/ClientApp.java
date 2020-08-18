@@ -7,13 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import com.github.caijh.auth.server.enums.AuthorizedGrantTypeEnum;
-import com.github.caijh.commons.base.PersistentObject;
+import com.github.caijh.framework.orm.model.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Type;
 
 @Entity
 @Data
-public class ClientApp implements PersistentObject<String> {
+@EqualsAndHashCode(callSuper = false)
+public class ClientApp extends BaseEntity<String> {
 
     @Id
     private String clientId;
