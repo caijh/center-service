@@ -4,7 +4,7 @@ spring:
   aop:
     proxy-target-class: true
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/clientdb?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://${MYSQL_HOST:10.38.2.12}:${MYSQL_PORT:30306}/clientdb?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
     username: ${MYSQL_USER:root}
     password: ${MYSQL_PASSWORD:123456}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -17,8 +17,8 @@ spring:
       hibernate.jdbc.lob.non_contextual_creation: true
       hibernate.dialect: com.github.caijh.framework.orm.mysql.CustomMySqlDialect
   redis:
-    host: ${REDIS_HOST:127.0.0.1}
-    port: ${REDIS_PORT:6379}
+    host: ${REDIS_HOST:10.38.2.12}
+    port: ${REDIS_PORT:16379}
     database: 0
 
 config:
