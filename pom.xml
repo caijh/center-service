@@ -17,10 +17,6 @@
     <name>auth-server</name>
     <description>auth-server</description>
 
-    <properties>
-        <framework.version>2.3.2-SNAPSHOT</framework.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.github.caijh.commons</groupId>
@@ -42,10 +38,10 @@
             <artifactId>framework-redis</artifactId>
             <version>${framework.version}</version>
         </dependency>
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>com.github.caijh</groupId>
+            <artifactId>framework-web</artifactId>
+            <version>${framework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
