@@ -6,9 +6,9 @@ spring:
   cloud:
     config:
       discovery:
-        enabled: false
+        enabled: true
         service-id: config-server
-      enabled: false
+      enabled: true
 
 eureka:
   client:
