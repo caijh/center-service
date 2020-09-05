@@ -19,8 +19,24 @@ spec:
           imagePullPolicy: IfNotPresent
           name: auth-server
           ports:
-            - containerPort: 8080
+            - containerPort: 9000
               name: web
+          env:
+            - name: APP_OPTS
+              value: |
+                --spring.cloud.config.discovery.enabled=true
+                --spring.datasource.url=jdbc:mysql://127.0.0.1:3306/clientdb?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+                --spring.redis.host=127.0.0.1
+                --spring.redis.port=6379
+            - name: EUREKA_SERVER_ADDRESS
+                valueFrom:
+                  configMapKeyRef:
+                    name: eureka-config
+                    key: eureka_service_address
+          lifecycle:
+            preStop:
+              exec:
+                command: ["curl", "-X", "POST", "http://localhost:9000/actuator/shutdown"]
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
@@ -48,7 +64,7 @@ metadata:
     app: auth-server
 spec:
   ports:
-    - port: 8080
+    - port: 9000
       name: web
       targetPort: web
   selector:
