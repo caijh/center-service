@@ -29,10 +29,10 @@ spec:
                 --spring.redis.host=127.0.0.1
                 --spring.redis.port=6379
             - name: EUREKA_SERVER_ADDRESS
-                valueFrom:
-                  configMapKeyRef:
-                    name: eureka-config
-                    key: eureka_service_address
+              valueFrom:
+                configMapKeyRef:
+                  name: eureka-config
+                  key: eureka_service_address
           lifecycle:
             preStop:
               exec:
