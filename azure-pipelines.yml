@@ -12,7 +12,7 @@ pool:
 variables:
   - name: tag
     value: 1.0.0
-    
+
 steps:
 - task: Maven@3
   inputs:
@@ -28,6 +28,6 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'dockerRegistryServiceConnection'
-    repository: 'caijunhui/auth-server'
+    repository: 'caijunhui/auth-server-admin'
     command: 'push'
     tags: '$(tag)'
