@@ -28,6 +28,6 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'dockerRegistryServiceConnection'
-    repository: 'caijunhui/auth-server-admin'
+    repository: 'caijunhui/auth-server'
     command: 'push'
     tags: '$(tag)'
