@@ -3,11 +3,10 @@ spring:
     name: auth-server
   profiles:
     active: default
+  cloud:
+    config:
+      enabled: true
+      discovery:
+        enabled: false
+      uri: http://192.168.33.10:30080/config-server
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_SERVER_ADDRESS:http://127.0.0.1:8761/eureka/}
-
-server:
-  port: 9000
