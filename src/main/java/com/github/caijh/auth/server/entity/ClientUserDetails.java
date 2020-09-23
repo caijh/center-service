@@ -13,8 +13,8 @@ import static java.util.stream.Collectors.toList;
 
 public class ClientUserDetails implements UserDetails {
 
-    private String appId;
-    private User user;
+    private final String appId;
+    private final User user;
 
     public ClientUserDetails(String appId, User user) {
         this.appId = appId;
