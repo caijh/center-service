@@ -2,10 +2,10 @@ package com.github.caijh.auth.server.service;
 
 import java.util.List;
 
-import com.github.caijh.auth.server.vo.ResourceSelected;
+import com.github.caijh.auth.server.vo.RoleSelectedResources;
 
 public interface ResourceService {
 
-    List<ResourceSelected> findResourceSelected(String appId, Long userId);
+    List<RoleSelectedResources> findRoleSelectedResources(String appId, Long userId);
 
 }

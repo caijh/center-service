@@ -1,20 +1,19 @@
 package com.github.caijh.auth.server.aop;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.inject.Inject;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.github.caijh.auth.server.entity.Role;
 import com.github.caijh.auth.server.service.ResourceService;
-import com.github.caijh.auth.server.vo.ResourceSelected;
+import com.github.caijh.auth.server.vo.RoleSelectedResources;
+import com.github.caijh.framework.redis.Redis;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -24,7 +23,7 @@ public class AccessTokenAspect {
     @Inject
     private ResourceService resourceService;
     @Inject
-    private RedisTemplate<String, Object> redisTemplate;
+    private Redis redis;
 
     @Pointcut("execution(public * org.springframework.security.oauth2.provider.endpoint.TokenEndpoint.postAccessToken(..))")
     public void postAccessToken() {
@@ -37,21 +36,18 @@ public class AccessTokenAspect {
         JSONObject additionalInformation = body.getJSONObject("additionalInformation");
         String appId = additionalInformation.getString("appId");
         Long userId = additionalInformation.getLong("userId");
-        cache4NextAuth(appId, userId, body.getLong("expiration"));
+        cacheUserRoleSelectedResources(appId, userId, body.getLong("expiration"));
     }
 
-    private void cache4NextAuth(String appId, Long userId, Long expiration) {
-        List<ResourceSelected> selectedResources = resourceService.findResourceSelected(appId, userId);
-        Set<String> codes = new HashSet<>();
-        selectedResources.forEach(e -> {
-            String name = e.getResource().getName();
-            e.getActionNames().forEach(action -> codes.add(name + ":" + action));
+    private void cacheUserRoleSelectedResources(String appId, Long userId, Long expiration) {
+        List<RoleSelectedResources> roleSelectedResourcesList = resourceService.findRoleSelectedResources(appId, userId);
+        String key = "APP:" + appId + ":USER:" + userId + ":AUTH";
+        redis.getRedisTemplate().delete(key);
+        roleSelectedResourcesList.forEach(roleSelectedResources -> {
+            Role role = roleSelectedResources.getRole();
+            redis.getRedisTemplate().opsForHash().put(key, role.getCode(), roleSelectedResources.getSelectedResources());
         });
-
-        String key = "AUTH:" + appId + ":" + userId;
-        redisTemplate.delete(key);
-        redisTemplate.opsForSet().add(key, codes.toArray(new String[]{}));
-        redisTemplate.expireAt(key, new Date(expiration));
+        redis.getRedisTemplate().expireAt(key, new Date(expiration));
     }
 
 }

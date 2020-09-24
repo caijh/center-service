@@ -7,10 +7,10 @@ import com.github.caijh.auth.server.entity.Resource;
 import lombok.Data;
 
 @Data
-public class ResourceSelected implements Serializable {
+public class SelectedResource implements Serializable {
 
     private Resource resource;
 
-    private Set<String> actionNames;
+    private Set<Resource.Action> allowedActions;
 
 }
