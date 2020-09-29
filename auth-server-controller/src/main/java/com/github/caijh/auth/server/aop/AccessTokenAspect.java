@@ -6,9 +6,9 @@ import javax.inject.Inject;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.github.caijh.auth.entity.Role;
+import com.github.caijh.auth.server.entity.Role;
+import com.github.caijh.auth.server.model.RoleSelectedResources;
 import com.github.caijh.auth.server.service.ResourceService;
-import com.github.caijh.auth.server.vo.RoleSelectedResources;
 import com.github.caijh.framework.redis.Redis;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;

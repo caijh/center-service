@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.github.caijh.auth.entity.ClientApp;
-import com.github.caijh.auth.enums.ClientTypeEnum;
+import com.github.caijh.auth.server.entity.ClientApp;
+import com.github.caijh.auth.server.enums.ClientTypeEnum;
 import com.github.caijh.commons.base.enums.IndexEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;

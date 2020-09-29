@@ -1,4 +1,4 @@
-package com.github.caijh.auth.enums;
+package com.github.caijh.auth.server.enums;
 
 public enum AuthorizedGrantTypeEnum {
     AUTHORIZATION_CODE("authorization_code"),

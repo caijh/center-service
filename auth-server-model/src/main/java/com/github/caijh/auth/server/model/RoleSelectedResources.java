@@ -1,8 +1,8 @@
-package com.github.caijh.auth.server.vo;
+package com.github.caijh.auth.server.model;
 
 import java.util.Set;
 
-import com.github.caijh.auth.entity.Role;
+import com.github.caijh.auth.server.entity.Role;
 import lombok.Data;
 
 @Data

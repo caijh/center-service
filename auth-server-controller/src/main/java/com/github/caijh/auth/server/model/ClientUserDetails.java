@@ -2,8 +2,8 @@ package com.github.caijh.auth.server.model;
 
 import java.util.Collection;
 
-import com.github.caijh.auth.entity.User;
-import com.github.caijh.auth.enums.UserStatusEnum;
+import com.github.caijh.auth.server.entity.User;
+import com.github.caijh.auth.server.enums.UserStatusEnum;
 import com.github.caijh.commons.base.enums.IndexEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,4 +1,4 @@
-package com.github.caijh.auth.entity;
+package com.github.caijh.auth.server.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,19 +8,25 @@ import javax.persistence.Id;
 import com.github.caijh.framework.orm.model.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-public class UserRole extends BaseEntity<Long> {
+public class Role extends BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
-    private Long roleId;
+    private String appId;
+
+    private String code;
+
+    private String name;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
 
 }

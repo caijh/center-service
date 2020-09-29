@@ -2,7 +2,7 @@ package com.github.caijh.auth.server.repository;
 
 import java.util.List;
 
-import com.github.caijh.auth.entity.Role;
+import com.github.caijh.auth.server.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

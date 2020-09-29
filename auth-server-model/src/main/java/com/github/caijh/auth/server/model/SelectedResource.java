@@ -1,9 +1,9 @@
-package com.github.caijh.auth.server.vo;
+package com.github.caijh.auth.server.model;
 
 import java.io.Serializable;
 import java.util.Set;
 
-import com.github.caijh.auth.entity.Resource;
+import com.github.caijh.auth.server.entity.Resource;
 import lombok.Data;
 
 @Data

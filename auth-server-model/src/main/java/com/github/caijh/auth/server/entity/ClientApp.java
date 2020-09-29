@@ -1,4 +1,4 @@
-package com.github.caijh.auth.entity;
+package com.github.caijh.auth.server.entity;
 
 import java.util.Map;
 import java.util.Set;
@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import com.github.caijh.auth.enums.AuthorizedGrantTypeEnum;
+import com.github.caijh.auth.server.enums.AuthorizedGrantTypeEnum;
 import com.github.caijh.framework.orm.model.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

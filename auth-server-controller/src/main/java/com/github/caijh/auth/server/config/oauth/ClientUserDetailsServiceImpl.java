@@ -5,10 +5,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 
-import com.github.caijh.auth.entity.ClientApp;
+import com.github.caijh.auth.server.entity.ClientApp;
+import com.github.caijh.auth.server.entity.Role;
+import com.github.caijh.auth.server.entity.User;
 import com.github.caijh.auth.server.model.ClientUserDetails;
-import com.github.caijh.auth.entity.Role;
-import com.github.caijh.auth.entity.User;
 import com.github.caijh.auth.server.repository.ClientAppRepository;
 import com.github.caijh.auth.server.repository.RoleRepository;
 import com.github.caijh.auth.server.repository.UserRepository;

@@ -1,4 +1,4 @@
-package com.github.caijh.auth.enums;
+package com.github.caijh.auth.server.enums;
 
 
 import com.github.caijh.commons.base.enums.IndexEnum;

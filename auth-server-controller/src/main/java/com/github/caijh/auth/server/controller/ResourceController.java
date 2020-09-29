@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
 
-import com.github.caijh.auth.entity.Resource;
+import com.github.caijh.auth.server.entity.Resource;
+import com.github.caijh.auth.server.model.SelectedResource;
 import com.github.caijh.auth.server.request.UrlCheckReqBody;
-import com.github.caijh.auth.server.vo.SelectedResource;
 import com.github.caijh.framework.redis.Redis;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

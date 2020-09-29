@@ -1,4 +1,4 @@
-package com.github.caijh.auth.entity;
+package com.github.caijh.auth.server.entity;
 
 import java.io.Serializable;
 import java.util.List;
