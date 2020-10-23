@@ -37,7 +37,6 @@
         <dependency>
             <groupId>com.github.caijh</groupId>
             <artifactId>auth-server-model</artifactId>
-            <version>${parent.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.caijh</groupId>
