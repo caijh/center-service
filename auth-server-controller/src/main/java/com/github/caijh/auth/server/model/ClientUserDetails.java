@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import com.github.caijh.auth.server.entity.User;
 import com.github.caijh.auth.server.enums.UserStatusEnum;
-import com.github.caijh.commons.base.enums.IndexEnum;
+import com.github.caijh.framework.core.enums.IndexEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.CollectionUtils;
@@ -35,7 +35,11 @@ public class ClientUserDetails implements UserDetails {
         if (CollectionUtils.isEmpty(this.user.getRoles())) {
             return emptyList();
         }
-        return this.user.getRoles().parallelStream().map(role -> (GrantedAuthority) role::getCode).collect(toList());
+        return this.user.getRoles().parallelStream().map(role -> newGrantedAuthority(role.getCode())).collect(toList());
+    }
+
+    private GrantedAuthority newGrantedAuthority(String granted) {
+        return () -> granted;
     }
 
     @Override

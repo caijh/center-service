@@ -3,7 +3,7 @@ package com.github.caijh.auth.server.request;
 import java.util.List;
 import javax.annotation.Nonnull;
 
-import com.github.caijh.commons.base.ReqBody;
+import com.github.caijh.framework.core.model.ReqBody;
 import lombok.Data;
 
 @Data

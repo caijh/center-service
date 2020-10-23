@@ -1,5 +1,8 @@
 package com.github.caijh.auth.server.enums;
 
+/**
+ * OAuth的验证方式.
+ */
 public enum AuthorizedGrantTypeEnum {
     AUTHORIZATION_CODE("authorization_code"),
     IMPLICIT("implicit"),

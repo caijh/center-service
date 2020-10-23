@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.caijh.framework.orm.model.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,8 +27,7 @@ public class User extends BaseEntity<Long> {
     private Integer status;
 
     @Transient
-    @JsonIgnore
-    private List<Role> roles;
+    private transient List<Role> roles;
 
 }
 

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import com.github.caijh.auth.server.entity.ClientApp;
 import com.github.caijh.auth.server.enums.ClientTypeEnum;
-import com.github.caijh.commons.base.enums.IndexEnum;
+import com.github.caijh.framework.core.enums.IndexEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
 
@@ -63,7 +63,7 @@ public class ClientAppDetails implements ClientDetails {
     public Collection<GrantedAuthority> getAuthorities() {
         return clientApp.getAuthorities()
                         .parallelStream()
-                        .map(authority -> (GrantedAuthority) () -> authority)
+                        .map(authority -> (GrantedAuthority) (() -> authority))
                         .collect(Collectors.toList());
     }
 
