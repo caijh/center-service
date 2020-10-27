@@ -15,8 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>com.github.caijh</groupId>
-            <artifactId>framework-orm</artifactId>
-            <scope>provided</scope>
+            <artifactId>framework-model</artifactId>
         </dependency>
     </dependencies>
 

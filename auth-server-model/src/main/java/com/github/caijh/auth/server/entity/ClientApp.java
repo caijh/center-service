@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import com.github.caijh.auth.server.enums.AuthorizedGrantTypeEnum;
-import com.github.caijh.framework.orm.model.BaseEntity;
+import com.github.caijh.framework.core.model.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Type;
