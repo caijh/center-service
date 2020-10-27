@@ -5,11 +5,10 @@
     <parent>
         <artifactId>auth-server</artifactId>
         <groupId>com.github.caijh</groupId>
-        <version>1.0.0</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>1.0.0-SNAPSHOT</version>
 
     <artifactId>auth-server-feign</artifactId>
 

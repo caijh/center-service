@@ -16,11 +16,15 @@
     </parent>
 
     <artifactId>auth-server</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>auth-server</name>
     <description>auth-server</description>
+
+    <properties>
+        <auth-server.version>1.0.0-SNAPSHOT</auth-server.version>
+    </properties>
 
     <repositories>
         <repository>
@@ -36,7 +40,7 @@
             <dependency>
                 <groupId>com.github.caijh</groupId>
                 <artifactId>auth-server-model</artifactId>
-                <version>1.0.0</version>
+                <version>${auth-server.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
