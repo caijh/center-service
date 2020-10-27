@@ -1,7 +1,10 @@
 target/
 !**/.mvn/wrapper/maven-wrapper.jar
 
-**/doc/api
+!**/.gitkeep
+
+**/doc/api/**
+*.log
 
 ### STS ###
 .apt_generated
