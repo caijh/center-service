@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 客户端控制器.
+ */
 @RestController
 public class ClientController extends BaseController {
 

@@ -8,5 +8,5 @@ spring:
       enabled: true
       discovery:
         enabled: false
-      uri: http://10.38.2.12:30888
+      uri: http://192.168.33.10:30080/config-server
 

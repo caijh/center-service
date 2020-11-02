@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.caijh.auth.server.entity.Resource;
 import com.github.caijh.auth.server.model.SelectedResource;
 import com.github.caijh.auth.server.request.UrlCheckReqBody;
 import com.github.caijh.framework.redis.Redis;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.OK;
 
+/**
+ * 资源控制器.
+ */
 @RestController
 public class ResourceController {
 
@@ -31,7 +35,7 @@ public class ResourceController {
      * @return string "OK" if user has permission to visit url.
      */
     @PostMapping("/url/check")
-    public ResponseEntity<String> isAllowed(@RequestBody UrlCheckReqBody reqBody) {
+    public ResponseEntity<JSONObject> isAllowed(@RequestBody UrlCheckReqBody reqBody) {
         String key = "APP:" + reqBody.getClientId() + ":USER:" + reqBody.getUserId() + ":AUTH";
         List<Object> objects = redis.getRedisTemplate().opsForHash().multiGet(key, reqBody.getRoleCodes());
         for (Object obj : objects) {
@@ -43,12 +47,12 @@ public class ResourceController {
             for (SelectedResource selectedResource : selectedResources) {
                 for (Resource.Action allowedAction : selectedResource.getAllowedActions()) {
                     if (isAllowed(allowedAction, reqBody.getUrl(), reqBody.getMethod())) {
-                        return ResponseEntity.ok(HttpStatus.OK.getReasonPhrase());
+                        return ResponseEntity.ok(new JSONObject().fluentPut("message", OK.getReasonPhrase()));
                     }
                 }
             }
         }
-        return ResponseEntity.ok(FORBIDDEN.getReasonPhrase());
+        return ResponseEntity.ok(new JSONObject().fluentPut("message", FORBIDDEN.getReasonPhrase()));
     }
 
     private boolean isAllowed(Resource.Action action, String url, String method) {
