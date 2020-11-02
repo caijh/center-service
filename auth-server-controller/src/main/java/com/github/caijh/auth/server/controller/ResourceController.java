@@ -35,7 +35,7 @@ public class ResourceController {
         String key = "APP:" + reqBody.getClientId() + ":USER:" + reqBody.getUserId() + ":AUTH";
         List<Object> objects = redis.getRedisTemplate().opsForHash().multiGet(key, reqBody.getRoleCodes());
         for (Object obj : objects) {
-            if (!Set.class.isAssignableFrom(obj.getClass())) {
+            if (obj == null || !Set.class.isAssignableFrom(obj.getClass())) {
                 continue;
             }
             @SuppressWarnings("unchecked")
@@ -52,7 +52,7 @@ public class ResourceController {
     }
 
     private boolean isAllowed(Resource.Action action, String url, String method) {
-        if (!action.getMethod().equals(method)) {
+        if (!action.getMethod().equalsIgnoreCase(method)) {
             return false;
         }
         return pathMatcher.match(action.getUrl(), url);

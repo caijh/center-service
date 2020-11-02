@@ -38,6 +38,7 @@ public class ResourceServiceImpl implements ResourceService {
                               .forEach((role, roleResources) -> {
                                   RoleSelectedResources roleSelectedResources = new RoleSelectedResources();
                                   roleSelectedResources.setRole(role);
+                                  roleSelectedResources.setSelectedResources(new HashSet<>());
 
                                   roleResources.forEach(e -> {
                                       SelectedResource selected = new SelectedResource();

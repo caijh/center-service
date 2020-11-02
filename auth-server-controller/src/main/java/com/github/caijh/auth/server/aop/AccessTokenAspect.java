@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.github.caijh.auth.server.entity.ClientApp;
 import com.github.caijh.auth.server.entity.Role;
 import com.github.caijh.auth.server.model.RoleSelectedResources;
 import com.github.caijh.auth.server.service.ResourceService;
@@ -34,8 +35,8 @@ public class AccessTokenAspect {
     public void afterReturning(JoinPoint joinPoint, Object result) {
         JSONObject body = JSON.parseObject(JSON.toJSONString(result)).getJSONObject("body");
         JSONObject additionalInformation = body.getJSONObject("additionalInformation");
-        String appId = additionalInformation.getString("appId");
-        Long userId = additionalInformation.getLong("userId");
+        String appId = additionalInformation.getString(ClientApp.APP_ID);
+        Long userId = additionalInformation.getLong(ClientApp.USER_ID);
         cacheUserRoleSelectedResources(appId, userId, body.getLong("expiration"));
     }
 

@@ -3,6 +3,7 @@ package com.github.caijh.auth.server.config.jwt;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.github.caijh.auth.server.entity.ClientApp;
 import com.github.caijh.auth.server.model.ClientUserDetails;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -17,8 +18,8 @@ public class AdditionalClaimsTokenEnhancer implements TokenEnhancer {
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
         ClientUserDetails clientUserDetails = (ClientUserDetails) authentication.getPrincipal();
         Map<String, Object> map = new HashMap<>();
-        map.put("app_id", clientUserDetails.getAppId());
-        map.put("user_id", clientUserDetails.getUser().getId());
+        map.put(ClientApp.APP_ID, clientUserDetails.getAppId());
+        map.put(ClientApp.USER_ID, clientUserDetails.getUser().getId());
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(map);
         return accessToken;
     }

@@ -17,6 +17,9 @@ import org.hibernate.annotations.Type;
 @EqualsAndHashCode(callSuper = false)
 public class ClientApp extends BaseEntity<String> {
 
+    public static final String APP_ID = "app_id";
+    public static final String USER_ID = "user_id";
+
     @Id
     private String clientId;
     @Column(unique = true)
