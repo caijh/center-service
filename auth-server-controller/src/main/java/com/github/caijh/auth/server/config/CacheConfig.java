@@ -19,7 +19,7 @@ public class CacheConfig {
     public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory, Environment env) {
         String cacheNamePrefix = env.getProperty("spring.application.name", "CACHE");
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig().prefixCacheNameWith(cacheNamePrefix)
-                                                                                 .entryTtl(Duration.ofMinutes(5));
+                                                                                 .entryTtl(Duration.ofMinutes(1));
         return RedisCacheManager.builder(redisConnectionFactory).cacheDefaults(redisCacheConfiguration).build();
     }
 
