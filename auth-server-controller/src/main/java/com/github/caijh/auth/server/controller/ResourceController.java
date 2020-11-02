@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.caijh.auth.server.contants.Keys;
 import com.github.caijh.auth.server.entity.Resource;
 import com.github.caijh.auth.server.model.SelectedResource;
 import com.github.caijh.auth.server.request.UrlCheckReqBody;
@@ -47,12 +48,12 @@ public class ResourceController {
             for (SelectedResource selectedResource : selectedResources) {
                 for (Resource.Action allowedAction : selectedResource.getAllowedActions()) {
                     if (isAllowed(allowedAction, reqBody.getUrl(), reqBody.getMethod())) {
-                        return ResponseEntity.ok(new JSONObject().fluentPut("message", OK.getReasonPhrase()));
+                        return ResponseEntity.ok(new JSONObject().fluentPut(Keys.MESSAGE_KEY, OK.getReasonPhrase()));
                     }
                 }
             }
         }
-        return ResponseEntity.ok(new JSONObject().fluentPut("message", FORBIDDEN.getReasonPhrase()));
+        return ResponseEntity.ok(new JSONObject().fluentPut(Keys.MESSAGE_KEY, FORBIDDEN.getReasonPhrase()));
     }
 
     private boolean isAllowed(Resource.Action action, String url, String method) {
