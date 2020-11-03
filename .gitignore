@@ -5,6 +5,7 @@ target/
 
 **/doc/api/**
 *.log
+*.gz
 
 ### STS ###
 .apt_generated

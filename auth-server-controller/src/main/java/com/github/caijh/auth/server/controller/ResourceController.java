@@ -4,11 +4,10 @@ import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
 
-import com.alibaba.fastjson.JSONObject;
-import com.github.caijh.auth.server.contants.Keys;
 import com.github.caijh.auth.server.entity.Resource;
 import com.github.caijh.auth.server.model.SelectedResource;
 import com.github.caijh.auth.server.request.UrlCheckReqBody;
+import com.github.caijh.framework.core.model.R;
 import com.github.caijh.framework.redis.Redis;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.AntPathMatcher;
@@ -36,7 +35,7 @@ public class ResourceController {
      * @return string "OK" if user has permission to visit url.
      */
     @PostMapping("/url/check")
-    public ResponseEntity<JSONObject> isAllowed(@RequestBody UrlCheckReqBody reqBody) {
+    public ResponseEntity<R<Void>> isAllowed(@RequestBody UrlCheckReqBody reqBody) {
         String key = "APP:" + reqBody.getClientId() + ":USER:" + reqBody.getUserId() + ":AUTH";
         List<Object> objects = redis.getRedisTemplate().opsForHash().multiGet(key, reqBody.getRoleCodes());
         for (Object obj : objects) {
@@ -48,12 +47,12 @@ public class ResourceController {
             for (SelectedResource selectedResource : selectedResources) {
                 for (Resource.Action allowedAction : selectedResource.getAllowedActions()) {
                     if (isAllowed(allowedAction, reqBody.getUrl(), reqBody.getMethod())) {
-                        return ResponseEntity.ok(new JSONObject().fluentPut(Keys.MESSAGE_KEY, OK.getReasonPhrase()));
+                        return ResponseEntity.ok(R.of(OK.getReasonPhrase()));
                     }
                 }
             }
         }
-        return ResponseEntity.ok(new JSONObject().fluentPut(Keys.MESSAGE_KEY, FORBIDDEN.getReasonPhrase()));
+        return ResponseEntity.ok(R.of(FORBIDDEN.getReasonPhrase()));
     }
 
     private boolean isAllowed(Resource.Action action, String url, String method) {

@@ -1,19 +1,15 @@
 package com.github.caijh.auth.server.feign;
 
-import com.github.caijh.auth.server.entity.ClientApp;
+import com.github.caijh.framework.core.model.R;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(value = "auth-server", fallback = AuthServerFallback.class)
+@FeignClient(name = "auth-server", fallback = AuthServerFallback.class)
 public interface AuthServer {
 
     @PostMapping(value = "/url/check")
-    String checkUrl(@RequestBody UrlCheckReqBody reqBody);
-
-    @GetMapping(value = "/client/{clientId}")
-    ClientApp getClientApp(@PathVariable("clientId") String clientId);
+    ResponseEntity<R<Void>> checkUrl(@RequestBody UrlCheckReqBody reqBody);
 
 }
