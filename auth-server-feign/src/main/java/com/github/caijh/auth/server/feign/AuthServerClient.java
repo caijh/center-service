@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "auth-server", fallback = AuthServerFeignFallback.class)
-public interface AuthServerFeign {
+@FeignClient(name = "auth-server", fallback = AuthServerClientFallback.class)
+public interface AuthServerClient {
 
     @GetMapping(value = "/oauth/check_token")
     ResponseEntity<AuthInfo> checkToken(@RequestParam String token);

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 @Component
-public class AuthServerFeignFallback implements AuthServerFeign {
+public class AuthServerClientFallback implements AuthServerClient {
 
     @Override
     public ResponseEntity<AuthInfo> checkToken(String token) {
