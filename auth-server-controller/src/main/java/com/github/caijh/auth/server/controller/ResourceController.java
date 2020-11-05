@@ -9,6 +9,7 @@ import com.github.caijh.auth.server.model.SelectedResource;
 import com.github.caijh.auth.server.request.UrlCheckReqBody;
 import com.github.caijh.framework.core.model.R;
 import com.github.caijh.framework.redis.Redis;
+import org.springframework.data.util.CastUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,8 +43,7 @@ public class ResourceController {
             if (obj == null || !Set.class.isAssignableFrom(obj.getClass())) {
                 continue;
             }
-            @SuppressWarnings("unchecked")
-            Set<SelectedResource> selectedResources = (Set<SelectedResource>) obj;
+            Set<SelectedResource> selectedResources = CastUtils.cast(obj);
             for (SelectedResource selectedResource : selectedResources) {
                 for (Resource.Action allowedAction : selectedResource.getAllowedActions()) {
                     if (isAllowed(allowedAction, reqBody.getUrl(), reqBody.getMethod())) {
