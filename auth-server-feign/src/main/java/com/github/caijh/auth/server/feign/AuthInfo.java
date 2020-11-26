@@ -2,19 +2,19 @@ package com.github.caijh.auth.server.feign;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 
+
 @Data
+@JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class AuthInfo {
 
-    @JsonProperty("user_id")
     private String userId;
 
-    @JsonProperty("user_name")
     private String userName;
 
-    @JsonProperty("client_id")
     private String clientId;
 
     private List<String> scope;
