@@ -16,7 +16,7 @@ public class AuthServerClientFallback implements AuthServerClient {
 
     @Override
     public ResponseEntity<R<Void>> checkUrl(UrlCheckReqBody reqBody) {
-        return ResponseEntity.ok().body(new R<Void>().setMessage(FORBIDDEN.getReasonPhrase()));
+        return ResponseEntity.ok().body(R.of(FORBIDDEN.getReasonPhrase()));
     }
 
 }
