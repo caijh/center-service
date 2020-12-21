@@ -8,7 +8,7 @@ import com.github.caijh.auth.server.entity.Resource;
 import com.github.caijh.auth.server.model.SelectedResource;
 import com.github.caijh.auth.server.request.UrlCheckReqBody;
 import com.github.caijh.framework.core.model.R;
-import com.github.caijh.framework.redis.Redis;
+import com.github.caijh.framework.data.redis.Redis;
 import org.springframework.data.util.CastUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.AntPathMatcher;

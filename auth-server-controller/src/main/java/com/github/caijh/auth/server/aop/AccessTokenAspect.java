@@ -10,7 +10,7 @@ import com.github.caijh.auth.server.entity.ClientApp;
 import com.github.caijh.auth.server.entity.Role;
 import com.github.caijh.auth.server.model.RoleSelectedResources;
 import com.github.caijh.auth.server.service.ResourceService;
-import com.github.caijh.framework.redis.Redis;
+import com.github.caijh.framework.data.redis.Redis;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
