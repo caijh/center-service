@@ -8,5 +8,6 @@ spring:
       enabled: true
       discovery:
         enabled: false
+        service-id: config-server
       uri: http://192.168.33.10:30080/config-server
 
