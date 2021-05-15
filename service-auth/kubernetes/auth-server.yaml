@@ -36,7 +36,7 @@ spec:
           lifecycle:
             preStop:
               exec:
-                command: ["curl", "-X", "POST", "http://localhost:9000/actuator/shutdown"]
+                command: [ "curl", "-X", "POST", "http://localhost:9000/actuator/shutdown" ]
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
