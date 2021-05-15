@@ -11,7 +11,7 @@
 
     <groupId>com.github.caijh.auth</groupId>
     <artifactId>auth-server-parent</artifactId>
-    <version>${auth-server.version}</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>auth-server-parent</name>
@@ -42,6 +42,11 @@
                 <groupId>com.github.caijh.auth</groupId>
                 <artifactId>auth-model</artifactId>
                 <version>${auth-server.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>2.2.5.RELEASE</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
