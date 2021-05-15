@@ -13,6 +13,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Type;
 
+/**
+ * 资源.
+ */
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -25,6 +28,9 @@ public class Resource extends BaseEntity<Long> {
     @Column(unique = true)
     private String name;
 
+    /**
+     * 资源的操作集
+     */
     @Type(type = "json")
     private List<Action> actions;
 
@@ -33,6 +39,9 @@ public class Resource extends BaseEntity<Long> {
         return this.id;
     }
 
+    /**
+     * 资源上的可操作.
+     */
     @Data
     public static class Action implements Serializable {
 

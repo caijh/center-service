@@ -9,6 +9,9 @@ import com.github.caijh.framework.core.model.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * 角色.
+ */
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)

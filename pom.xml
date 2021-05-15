@@ -11,16 +11,16 @@
 
     <groupId>com.github.caijh.auth</groupId>
     <artifactId>auth-server-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>${auth-server.version}</version>
     <packaging>pom</packaging>
 
-    <name>auth-server</name>
-    <description>auth-server</description>
+    <name>auth-server-parent</name>
+    <description>auth-server-parent</description>
 
     <modules>
         <module>auth-model</module>
-        <module>service-auth</module>
-        <module>auth-feign</module>
+        <module>auth-server</module>
+        <module>auth-feign-client</module>
     </modules>
 
     <properties>

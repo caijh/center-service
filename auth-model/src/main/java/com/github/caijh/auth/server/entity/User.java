@@ -13,6 +13,9 @@ import lombok.EqualsAndHashCode;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * 用户.
+ */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Entity

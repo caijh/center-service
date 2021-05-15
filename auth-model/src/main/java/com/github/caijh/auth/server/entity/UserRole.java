@@ -10,6 +10,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+/**
+ * 用户与角色的关系表.
+ */
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
