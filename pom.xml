@@ -20,11 +20,11 @@
     <modules>
         <module>auth-model</module>
         <module>auth-server</module>
-        <module>auth-feign-client</module>
+        <module>auth-client</module>
     </modules>
 
     <properties>
-        <auth-server.version>1.0.0-SNAPSHOT</auth-server.version>
+        <auth-server.version>${project.version}</auth-server.version>
     </properties>
 
     <repositories>
@@ -41,6 +41,11 @@
             <dependency>
                 <groupId>com.github.caijh.auth</groupId>
                 <artifactId>auth-model</artifactId>
+                <version>${auth-server.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.caijh.auth</groupId>
+                <artifactId>auth-client</artifactId>
                 <version>${auth-server.version}</version>
             </dependency>
             <dependency>
@@ -151,7 +156,7 @@
                     <useReleaseProfile>false</useReleaseProfile>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <arguments>-DskipTests -P release</arguments>
-                    <scmCommentPrefix>「版本发布」</scmCommentPrefix>
+                    <scmCommentPrefix>版本发布</scmCommentPrefix>
                 </configuration>
             </plugin>
         </plugins>
