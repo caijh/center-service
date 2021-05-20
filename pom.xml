@@ -24,7 +24,7 @@
     </modules>
 
     <properties>
-        <auth-server.revision>1.0.0-SNAPSHOT</auth-server.revision>
+        <auth.server.revision>1.0.0-SNAPSHOT</auth.server.revision>
     </properties>
 
     <repositories>
@@ -41,12 +41,12 @@
             <dependency>
                 <groupId>com.github.caijh.auth</groupId>
                 <artifactId>auth-model</artifactId>
-                <version>${auth-server.revision}</version>
+                <version>${auth.server.revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.caijh.auth</groupId>
                 <artifactId>auth-client</artifactId>
-                <version>${auth-server.revision}</version>
+                <version>${auth.server.revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
