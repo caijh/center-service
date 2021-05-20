@@ -11,7 +11,7 @@
 
     <groupId>com.github.caijh.auth</groupId>
     <artifactId>auth-server-parent</artifactId>
-    <version>${auth-server.revision}</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>auth-server-parent</name>
