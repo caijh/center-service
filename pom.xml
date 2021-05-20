@@ -11,7 +11,7 @@
 
     <groupId>com.github.caijh.auth</groupId>
     <artifactId>auth-server-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>${auth-server.revision}</version>
     <packaging>pom</packaging>
 
     <name>auth-server-parent</name>
@@ -24,7 +24,7 @@
     </modules>
 
     <properties>
-        <revision>1.0.0-SNAPSHOT</revision>
+        <auth-server.revision>1.0.0-SNAPSHOT</auth-server.revision>
     </properties>
 
     <repositories>
@@ -41,12 +41,12 @@
             <dependency>
                 <groupId>com.github.caijh.auth</groupId>
                 <artifactId>auth-model</artifactId>
-                <version>${revision}</version>
+                <version>${auth-server.revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.caijh.auth</groupId>
                 <artifactId>auth-client</artifactId>
-                <version>${revision}</version>
+                <version>${auth-server.revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
