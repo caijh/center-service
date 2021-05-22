@@ -8,6 +8,8 @@ module.exports = {
     '@vue/standard'
   ],
   rules: {
+    'object-curly-spacing': 0,
+    'object-property-newline': 0,
     'no-console': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'generator-star-spacing': 'off',
@@ -15,10 +17,13 @@ module.exports = {
     'vue/max-attributes-per-line': [
       2,
       {
-        'singleline': 5,
+        'singleline': {
+          'max': 5,
+          'allowFirstLine': true
+        },
         'multiline': {
-          'max': 1,
-          'allowFirstLine': false
+          'max': 5,
+          'allowFirstLine': true
         }
       }
     ],
@@ -48,6 +53,7 @@ module.exports = {
         'beforeStatementContinuationChars': 'never'
       }
     ],
+    'space-before-function-paren': 0,
     'no-delete-var': 2,
     'prefer-const': [
       2,
