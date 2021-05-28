@@ -1,6 +1,7 @@
 package com.github.caijh.auth.server.admin.utils;
 
 import com.github.caijh.auth.server.admin.request.RoleAddReqBody;
+import com.github.caijh.auth.server.admin.request.RoleUpdateReqBody;
 import com.github.caijh.auth.server.entity.Role;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -13,5 +14,10 @@ public interface RoleConvertMapper {
 
     @Mapping(target = "id", ignore = true)
     Role fromRoleAddReqBody(RoleAddReqBody reqBody);
+
+    @Mapping(target = "id", ignore = true)
+    Role fromRoleUpdateReqBody(RoleUpdateReqBody reqBody);
+
+    Role fromRole(Role role);
 
 }

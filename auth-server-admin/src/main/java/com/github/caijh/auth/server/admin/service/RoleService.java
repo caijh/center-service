@@ -5,4 +5,8 @@ import com.github.caijh.framework.data.BaseService;
 
 public interface RoleService extends BaseService<Role, Long> {
 
+    void add(Role role);
+
+    void update(Role role);
+
 }

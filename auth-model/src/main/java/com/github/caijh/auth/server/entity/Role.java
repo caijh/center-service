@@ -17,6 +17,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class Role extends BaseEntity<Long> {
 
+    private static final long serialVersionUID = -4151738593093032582L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,7 +30,7 @@ public class Role extends BaseEntity<Long> {
 
     @Override
     public Long getId() {
-        return id;
+        return this.id;
     }
 
 }
