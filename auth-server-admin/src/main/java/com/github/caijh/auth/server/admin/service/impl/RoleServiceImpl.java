@@ -1,5 +1,8 @@
 package com.github.caijh.auth.server.admin.service.impl;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
@@ -7,9 +10,11 @@ import com.github.caijh.auth.server.admin.constants.MessageConstants;
 import com.github.caijh.auth.server.admin.repository.RoleRepository;
 import com.github.caijh.auth.server.admin.service.ClientAppService;
 import com.github.caijh.auth.server.admin.service.RoleService;
+import com.github.caijh.auth.server.admin.service.UserRoleService;
 import com.github.caijh.auth.server.admin.utils.RoleConvertMapper;
 import com.github.caijh.auth.server.entity.ClientApp;
 import com.github.caijh.auth.server.entity.Role;
+import com.github.caijh.auth.server.entity.UserRole;
 import com.github.caijh.commons.util.Asserts;
 import com.github.caijh.framework.core.exception.BizException;
 import com.github.caijh.framework.data.BaseServiceImpl;
@@ -20,6 +25,9 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleRepository, Role, Long>
 
     @Inject
     private ClientAppService clientAppService;
+
+    @Inject
+    private UserRoleService userRoleService;
 
     @Transactional
     @Override
@@ -38,6 +46,24 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleRepository, Role, Long>
         oldRole = RoleConvertMapper.MAPPER.fromRole(role);
 
         this.save(oldRole);
+    }
+
+    @Transactional
+    @Override
+    public void addUser(List<UserRole> userRoles) {
+        this.deleteUser(userRoles);
+
+        this.userRoleService.saveAll(userRoles);
+    }
+
+    @Transactional
+    @Override
+    public void deleteUser(List<UserRole> userRoles) {
+        Map<Long, List<UserRole>> group = userRoles.stream().collect(Collectors.groupingBy(UserRole::getRoleId));
+        group.forEach((k, v) -> {
+            List<Long> userIds = v.stream().map(UserRole::getUserId).collect(Collectors.toList());
+            this.userRoleService.deleteByRoleIdAndUserIdIn(k, userIds);
+        });
     }
 
 }

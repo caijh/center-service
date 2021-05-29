@@ -1,17 +1,22 @@
 package com.github.caijh.auth.server.admin.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 import com.github.caijh.auth.server.admin.request.RoleAddReqBody;
 import com.github.caijh.auth.server.admin.request.RoleUpdateReqBody;
+import com.github.caijh.auth.server.admin.request.RoleUserReqBody;
 import com.github.caijh.auth.server.admin.service.RoleService;
 import com.github.caijh.auth.server.admin.utils.RoleConvertMapper;
 import com.github.caijh.auth.server.entity.Role;
+import com.github.caijh.auth.server.entity.UserRole;
 import com.github.caijh.framework.core.model.PageReqBody;
 import com.github.caijh.framework.data.utils.PageRequestUtils;
 import com.github.caijh.framework.web.controller.BaseController;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,6 +53,18 @@ public class RoleController extends BaseController {
     @PostMapping(value = "/list")
     public Page<Role> page(@RequestBody @Validated PageReqBody pageReqBody) {
         return this.roleService.findAll(PageRequestUtils.newPageRequest(pageReqBody));
+    }
+
+    @PutMapping(value = "/{id}/user")
+    public void addUser(@PathVariable Long id, @RequestBody @Validated RoleUserReqBody reqBody) {
+        List<UserRole> userRoles = reqBody.getUserIds().stream().map(e -> new UserRole().setRoleId(id).setUserId(e)).collect(Collectors.toList());
+        this.roleService.addUser(userRoles);
+    }
+
+    @DeleteMapping(value = "/{id}/user")
+    public void deleteUser(@PathVariable Long id, @RequestBody @Validated RoleUserReqBody reqBody) {
+        List<UserRole> userRoles = reqBody.getUserIds().stream().map(e -> new UserRole().setRoleId(id).setUserId(e)).collect(Collectors.toList());
+        this.roleService.deleteUser(userRoles);
     }
 
 }
