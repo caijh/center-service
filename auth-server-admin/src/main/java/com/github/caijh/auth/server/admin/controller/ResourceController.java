@@ -7,7 +7,10 @@ import com.github.caijh.auth.server.admin.request.ResourceUpdateReqBody;
 import com.github.caijh.auth.server.admin.service.ResourceService;
 import com.github.caijh.auth.server.admin.utils.ResourceConvertMapper;
 import com.github.caijh.auth.server.entity.Resource;
+import com.github.caijh.framework.core.model.PageReqBody;
+import com.github.caijh.framework.data.utils.PageRequestUtils;
 import com.github.caijh.framework.web.controller.BaseController;
+import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +37,11 @@ public class ResourceController extends BaseController {
         reqBody.setId(id);
         Resource resource = ResourceConvertMapper.INSTANCE.fromResourceUpdateReqBody(reqBody);
         this.resourceService.update(resource);
+    }
+
+    @PostMapping(value = "/list")
+    public Page<Resource> list(@RequestBody @Validated PageReqBody pageReqBody) {
+        return this.resourceService.findAll(PageRequestUtils.newPageRequest(pageReqBody));
     }
 
 }
