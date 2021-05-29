@@ -7,4 +7,6 @@ public interface ResourceService extends BaseService<Resource, Long> {
 
     void add(Resource resource);
 
+    void update(Resource resource);
+
 }
