@@ -1,4 +1,4 @@
-package com.github.caijh.auth.server.admin.repository;
+package com.github.caijh.auth.server.admin.request;
 
 import com.github.caijh.framework.core.model.ReqBody;
 import lombok.Data;

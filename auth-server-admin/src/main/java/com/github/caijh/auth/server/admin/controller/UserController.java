@@ -2,7 +2,7 @@ package com.github.caijh.auth.server.admin.controller;
 
 import javax.inject.Inject;
 
-import com.github.caijh.auth.server.admin.repository.UserAddReqBody;
+import com.github.caijh.auth.server.admin.request.UserAddReqBody;
 import com.github.caijh.auth.server.admin.service.UserService;
 import com.github.caijh.auth.server.admin.utils.UserConvertMapper;
 import com.github.caijh.auth.server.entity.User;

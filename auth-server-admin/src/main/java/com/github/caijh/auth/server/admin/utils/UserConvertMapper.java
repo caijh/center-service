@@ -1,6 +1,6 @@
 package com.github.caijh.auth.server.admin.utils;
 
-import com.github.caijh.auth.server.admin.repository.UserAddReqBody;
+import com.github.caijh.auth.server.admin.request.UserAddReqBody;
 import com.github.caijh.auth.server.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
