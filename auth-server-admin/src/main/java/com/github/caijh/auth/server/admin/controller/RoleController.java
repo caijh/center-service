@@ -67,4 +67,9 @@ public class RoleController extends BaseController {
         this.roleService.deleteUser(userRoles);
     }
 
+    @PostMapping(value = "/{id}/resource")
+    public void listResource(@PathVariable Long id) {
+        this.roleService.listRoleResource(id);
+    }
+
 }
