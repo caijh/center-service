@@ -74,15 +74,16 @@ public class RoleController extends BaseController {
     public void saveRoleResources(@PathVariable Long id, @RequestBody @Validated RoleResourceReqBody reqBody) {
         Role role = new Role();
         role.setId(id);
-        List<RoleResource> roleResources = reqBody.getRoleResources().stream().map(e -> {
-            RoleResource roleResource = new RoleResource();
-            roleResource.setRole(role);
-            Resource resource = new Resource();
-            resource.setId(e.getResourceId());
-            roleResource.setResource(resource);
-            roleResource.setActionNames(e.getActionNames());
-            return roleResource;
-        }).collect(Collectors.toList());
+        List<RoleResource> roleResources = reqBody.getRoleResources().stream()
+                                                  .map(e -> {
+                                                      RoleResource roleResource = new RoleResource();
+                                                      roleResource.setRole(role);
+                                                      Resource resource = new Resource();
+                                                      resource.setId(e.getResourceId());
+                                                      roleResource.setResource(resource);
+                                                      roleResource.setActionNames(e.getActionNames());
+                                                      return roleResource;
+                                                  }).collect(Collectors.toList());
         this.roleService.saveRoleResources(roleResources);
     }
 
