@@ -5,11 +5,14 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 import com.github.caijh.auth.server.admin.request.RoleAddReqBody;
+import com.github.caijh.auth.server.admin.request.RoleResourceReqBody;
 import com.github.caijh.auth.server.admin.request.RoleUpdateReqBody;
 import com.github.caijh.auth.server.admin.request.RoleUserReqBody;
 import com.github.caijh.auth.server.admin.service.RoleService;
 import com.github.caijh.auth.server.admin.utils.RoleConvertMapper;
+import com.github.caijh.auth.server.entity.Resource;
 import com.github.caijh.auth.server.entity.Role;
+import com.github.caijh.auth.server.entity.RoleResource;
 import com.github.caijh.auth.server.entity.UserRole;
 import com.github.caijh.framework.core.model.PageReqBody;
 import com.github.caijh.framework.data.utils.PageRequestUtils;
@@ -67,9 +70,25 @@ public class RoleController extends BaseController {
         this.roleService.deleteUser(userRoles);
     }
 
-    @PostMapping(value = "/{id}/resource")
-    public void listResource(@PathVariable Long id) {
-        this.roleService.listRoleResource(id);
+    @PutMapping(value = "/{id}/resource")
+    public void saveRoleResources(@PathVariable Long id, @RequestBody @Validated RoleResourceReqBody reqBody) {
+        Role role = new Role();
+        role.setId(id);
+        List<RoleResource> roleResources = reqBody.getRoleResources().stream().map(e -> {
+            RoleResource roleResource = new RoleResource();
+            roleResource.setRole(role);
+            Resource resource = new Resource();
+            resource.setId(e.getResourceId());
+            roleResource.setResource(resource);
+            roleResource.setActionNames(e.getActionNames());
+            return roleResource;
+        }).collect(Collectors.toList());
+        this.roleService.saveRoleResources(roleResources);
+    }
+
+    @GetMapping(value = "/{id}/resource")
+    public List<RoleResource> listResource(@PathVariable Long id) {
+        return this.roleService.listRoleResource(id);
     }
 
 }

@@ -19,4 +19,6 @@ public interface RoleService extends BaseService<Role, Long> {
 
     List<RoleResource> listRoleResource(Long id);
 
+    void saveRoleResources(List<RoleResource> roleResources);
+
 }

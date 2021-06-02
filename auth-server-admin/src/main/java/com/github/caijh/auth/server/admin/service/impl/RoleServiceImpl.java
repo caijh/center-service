@@ -77,9 +77,25 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleRepository, Role, Long>
     public List<RoleResource> listRoleResource(Long roleId) {
         Role role = this.getOne(roleId);
         Asserts.notNull(role);
-        Specification<RoleResource> specification =
-                (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(PropertyResolver.methodToProperty(RoleResource::getRole)), role);
+        Specification<RoleResource> specification = (root, query, criteriaBuilder) -> criteriaBuilder
+                .equal(root.get(PropertyResolver.methodToProperty(RoleResource::getRole)), role);
         return this.roleResourceService.findAll(Specification.where(specification));
+    }
+
+    @Transactional
+    @Override
+    public void saveRoleResources(List<RoleResource> roleResources) {
+        Map<Role, List<RoleResource>> roleGroup = roleResources.stream().collect(Collectors.groupingBy(RoleResource::getRole));
+        roleGroup.forEach((k, v) -> v.forEach(e -> this.listRoleResource(k.getId()).stream() // 查看角色对应的资源
+                                                       .filter(roleResource -> roleResource.getResource().getId().equals(e.getResource().getId()))
+                                                       .findFirst()
+                                                       .ifPresent(roleResource -> e.setId(roleResource.getId()))));
+
+        // 删除没勾选的资源
+        List<Long> ids = roleResources.stream().map(RoleResource::getId).collect(Collectors.toList());
+        this.roleResourceService.deleteByIdNotIn(ids);
+
+        this.roleResourceService.saveAll(roleResources);
     }
 
 }
