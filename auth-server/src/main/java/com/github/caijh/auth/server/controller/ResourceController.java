@@ -8,7 +8,7 @@ import com.github.caijh.auth.server.entity.Resource;
 import com.github.caijh.auth.server.model.SelectedResource;
 import com.github.caijh.auth.server.request.UrlCheckReqBody;
 import com.github.caijh.framework.core.model.R;
-import com.github.caijh.framework.data.redis.Redis;
+import com.github.caijh.framework.data.redis.support.Redis;
 import com.github.caijh.framework.web.controller.BaseController;
 import org.springframework.data.util.CastUtils;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +39,7 @@ public class ResourceController extends BaseController {
     @PostMapping("/url/check")
     public ResponseEntity<R<Void>> isAllowed(@RequestBody UrlCheckReqBody reqBody) {
         String key = "APP:" + reqBody.getClientId() + ":USER:" + reqBody.getUserId() + ":AUTH";
-        List<Object> objects = redis.getRedisTemplate().opsForHash().multiGet(key, reqBody.getRoleCodes());
+        List<Object> objects = this.redis.getRedisTemplate().opsForHash().multiGet(key, reqBody.getRoleCodes());
         for (Object obj : objects) {
             if (obj == null || !Set.class.isAssignableFrom(obj.getClass())) {
                 continue;
@@ -47,7 +47,7 @@ public class ResourceController extends BaseController {
             Set<SelectedResource> selectedResources = CastUtils.cast(obj);
             for (SelectedResource selectedResource : selectedResources) {
                 for (Resource.Action allowedAction : selectedResource.getAllowedActions()) {
-                    if (isAllowed(allowedAction, reqBody.getUrl(), reqBody.getMethod())) {
+                    if (this.isAllowed(allowedAction, reqBody.getUrl(), reqBody.getMethod())) {
                         return ResponseEntity.ok(R.of(OK.getReasonPhrase()));
                     }
                 }
@@ -60,7 +60,7 @@ public class ResourceController extends BaseController {
         if (!action.getMethod().equalsIgnoreCase(method)) {
             return false;
         }
-        return pathMatcher.match(action.getUrl(), url);
+        return this.pathMatcher.match(action.getUrl(), url);
     }
 
 }

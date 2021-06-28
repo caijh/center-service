@@ -10,7 +10,7 @@ import com.github.caijh.auth.server.entity.ClientApp;
 import com.github.caijh.auth.server.entity.Role;
 import com.github.caijh.auth.server.model.RoleSelectedResources;
 import com.github.caijh.auth.server.service.ResourceService;
-import com.github.caijh.framework.data.redis.Redis;
+import com.github.caijh.framework.data.redis.support.Redis;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -37,18 +37,18 @@ public class AccessTokenAspect {
         JSONObject additionalInformation = body.getJSONObject("additionalInformation");
         String appId = additionalInformation.getString(ClientApp.APP_ID);
         Long userId = additionalInformation.getLong(ClientApp.USER_ID);
-        cacheUserRoleSelectedResources(appId, userId, body.getLong("expiration"));
+        this.cacheUserRoleSelectedResources(appId, userId, body.getLong("expiration"));
     }
 
     private void cacheUserRoleSelectedResources(String appId, Long userId, Long expiration) {
-        List<RoleSelectedResources> roleSelectedResourcesList = resourceService.findRoleSelectedResources(appId, userId);
+        List<RoleSelectedResources> roleSelectedResourcesList = this.resourceService.findRoleSelectedResources(appId, userId);
         String key = "USER:AUTH:" + userId;
-        redis.getRedisTemplate().delete(key);
+        this.redis.getRedisTemplate().delete(key);
         roleSelectedResourcesList.forEach(roleSelectedResources -> {
             Role role = roleSelectedResources.getRole();
-            redis.getRedisTemplate().opsForHash().put(key, role.getCode(), roleSelectedResources.getSelectedResources());
+            this.redis.getRedisTemplate().opsForHash().put(key, role.getCode(), roleSelectedResources.getSelectedResources());
         });
-        redis.getRedisTemplate().expireAt(key, new Date(expiration));
+        this.redis.getRedisTemplate().expireAt(key, new Date(expiration));
     }
 
 }

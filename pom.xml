@@ -25,7 +25,7 @@
     </modules>
 
     <properties>
-        <auth.server.revision>1.0.1-SNAPSHOT</auth.server.revision>
+        <auth.server.version>1.0.1-SNAPSHOT</auth.server.version>
     </properties>
 
     <developers>
@@ -65,16 +65,12 @@
             <dependency>
                 <groupId>com.github.caijh.auth</groupId>
                 <artifactId>auth-model</artifactId>
-                <version>${auth.server.revision}</version>
+                <version>${auth.server.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.caijh.auth</groupId>
                 <artifactId>auth-client</artifactId>
-                <version>${auth.server.revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.caijh.framework</groupId>
-                <artifactId>framework-config-nacos</artifactId>
+                <version>${auth.server.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
