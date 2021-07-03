@@ -7,6 +7,6 @@ import com.github.caijh.framework.data.jpa.BaseRepository;
 
 public interface UserRoleRepository extends BaseRepository<UserRole, Long> {
 
-    List<Long> findRoleIdByUserId(Long userId);
+    List<UserRole> findByUserId(Long userId);
 
 }

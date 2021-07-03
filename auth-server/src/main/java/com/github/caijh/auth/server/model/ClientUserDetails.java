@@ -12,8 +12,12 @@ import org.springframework.util.CollectionUtils;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
 
+/**
+ * 客户端user详情.
+ */
 public class ClientUserDetails implements UserDetails {
 
+    private static final long serialVersionUID = -8729427879056048051L;
     private final String appId;
     private final User user;
 
@@ -23,11 +27,11 @@ public class ClientUserDetails implements UserDetails {
     }
 
     public User getUser() {
-        return user;
+        return this.user;
     }
 
     public String getAppId() {
-        return appId;
+        return this.appId;
     }
 
     @Override
@@ -35,7 +39,7 @@ public class ClientUserDetails implements UserDetails {
         if (CollectionUtils.isEmpty(this.user.getRoles())) {
             return emptyList();
         }
-        return this.user.getRoles().parallelStream().map(role -> newGrantedAuthority(role.getCode())).collect(toList());
+        return this.user.getRoles().parallelStream().map(role -> this.newGrantedAuthority(role.getCode())).collect(toList());
     }
 
     private GrantedAuthority newGrantedAuthority(String granted) {

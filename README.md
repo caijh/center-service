@@ -1,0 +1,28 @@
+# auth-server使用
+
+post http://127.0.0.1:8000/oauth/token
+
+body: form-data
+
+```
+client_id: auth-server-admin
+client_secret: ae4e72ed-93ef-4053-96ff-d3c5efa266b5
+username: admin
+password: E10ADC3949BA59ABBE56E057F20F883E
+grant_type: password
+```
+
+返回值
+
+```json
+{
+    "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbIuiupOivgeacjeWKoeWZqCJdLCJleHAiOjE2MjUzMjc0MjAsImFwcF9pZCI6ImF1dGgtc2VydmVyLWFkbWluIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiIwMjBkNGU2OC04MjE0LTRkMDUtYTQ1Yy01N2ZhOTRjYTU3MTIiLCJjbGllbnRfaWQiOiJhdXRoLXNlcnZlci1hZG1pbiJ9.U_2D1s9SVTO56WD3L0SE7zQWJxeV5aoiVslOlVgb7LdtcePCSrsBaeZK2CujmCHGlinBzK_9FFTF8K2fuuog4RHuh-Dd8t4a3b0EX0uYguObs1HXJVBtZlYXa04iD7UKYqvzoPIBIrFZ_eVDxluMLrbJdSuAHQdKM6L61eLvtFvdDV_EkQzbJXID1kFrJef_Bic16m7Qot5asQY1L-1noj5Om3InGvkolCNnm8G0krB39qhHiJOHwkwNxjPiAgl3uz1zPBRpfVnPJqiaxoBnqbZUGSz4kKE2cYIHgB27hlCgkaKuSTv3DGbzJVCVSIazta1f96qeaoJK3BOJutNCxg",
+    "token_type": "bearer",
+    "refresh_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbIuiupOivgeacjeWKoeWZqCJdLCJhdGkiOiIwMjBkNGU2OC04MjE0LTRkMDUtYTQ1Yy01N2ZhOTRjYTU3MTIiLCJleHAiOjE2Mjc5MTU4MjAsImFwcF9pZCI6ImF1dGgtc2VydmVyLWFkbWluIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiI4OGEwZmRiZC0yNDVjLTRmZjItYTI4OS04MWE3Y2IyMjFhMjEiLCJjbGllbnRfaWQiOiJhdXRoLXNlcnZlci1hZG1pbiJ9.MVuVupSIFc_6I3OR6uHYag62zol2whjX5MhBicWaosVOi7bULZl_GhLSyHT1Stjp2g6H7aF4tA-h4Bsw37ngV8SKxqIB4Gsfzyg43DlEQ0yyHVjtBf7uwT0kya-hu28At1bjYASZMBpuT_42cwU5AVqkrwxkhtj0B63Sg-Yg-eekLjwclKTPRpEE4uWHj3ZxgjQRjI51nhjGsy9DiXOZiTzno14-6i1bgym5MTPI7Tl2fxf3sqNa4jN10HN_hT0C_RK2Xu0rI3ekv_QAtS7_S7alpCL26MtI2qZXeAvjW78dWknTfQ4sMoFlRNB4VurMsbA-0YnGYKUExuaZy0pEag",
+    "expires_in": 2573,
+    "scope": "auth-server-admin",
+    "user_id": 1,
+    "app_id": "auth-server-admin",
+    "jti": "020d4e68-8214-4d05-a45c-57fa94ca5712"
+}
+```
