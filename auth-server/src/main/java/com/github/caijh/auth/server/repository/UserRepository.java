@@ -1,9 +1,9 @@
 package com.github.caijh.auth.server.repository;
 
 import com.github.caijh.auth.server.entity.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.github.caijh.framework.data.jpa.BaseRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends BaseRepository<User, Long> {
 
     User findByUsername(String username);
 
