@@ -17,7 +17,11 @@ public class UserController extends BaseController {
 
     @GetMapping(value = "/user/{id}")
     public User detail(@PathVariable(value = "id") Long userId) {
-        return this.userService.getOneOrNull(userId);
+        User user = this.userService.getOneOrNull(userId);
+        if (user != null) {
+            user.setPassword(null); // do not return password
+        }
+        return user;
     }
 
 }
