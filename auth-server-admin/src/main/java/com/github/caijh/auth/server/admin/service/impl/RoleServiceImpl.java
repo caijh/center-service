@@ -19,7 +19,7 @@ import com.github.caijh.auth.server.entity.RoleResource;
 import com.github.caijh.auth.server.entity.UserRole;
 import com.github.caijh.commons.util.Asserts;
 import com.github.caijh.framework.core.exception.BizException;
-import com.github.caijh.framework.core.utils.PropertyResolver;
+import com.github.caijh.framework.core.util.PropertyResolver;
 import com.github.caijh.framework.data.BaseServiceImpl;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;

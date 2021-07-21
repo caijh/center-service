@@ -21,6 +21,7 @@ import org.hibernate.annotations.Type;
 @EqualsAndHashCode(callSuper = false)
 public class Resource extends BaseEntity<Long> {
 
+    private static final long serialVersionUID = -1552028484120723984L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -45,10 +46,17 @@ public class Resource extends BaseEntity<Long> {
     @Data
     public static class Action implements Serializable {
 
+        private static final long serialVersionUID = 6867420263442588950L;
         private String name;
         private String description;
+        /**
+         * url地址
+         */
         private String url;
-        private String method;
+        /**
+         * url上允许的方法
+         */
+        private List<String> methods;
 
     }
 
