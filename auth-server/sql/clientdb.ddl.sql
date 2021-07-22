@@ -90,4 +90,16 @@ CREATE TABLE `user_role`
   CHARACTER SET = utf8mb4
   ROW_FORMAT = Dynamic;
 
+CREATE TABLE `men_item` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `name` varchar(20) NOT NULL COMMENT '菜单名称、标题',
+  `icon` varchar(100) DEFAULT NULL COMMENT '图标',
+  `action` json DEFAULT NULL COMMENT '菜单的action',
+  `parent_id` bigint unsigned DEFAULT '0' COMMENT '上一级id',
+  `app_id` varchar(255) NOT NULL COMMENT '所属应用',
+  PRIMARY KEY (`id`),
+  KEY `men_item_FK_client_app_id` (`app_id`),
+  CONSTRAINT `men_item_FK_client_app_id` FOREIGN KEY (`app_id`) REFERENCES `client_app` (`client_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='应用菜单'
+
 SET FOREIGN_KEY_CHECKS = 1;
