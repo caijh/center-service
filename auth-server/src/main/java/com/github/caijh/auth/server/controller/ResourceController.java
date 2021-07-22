@@ -57,7 +57,7 @@ public class ResourceController extends BaseController {
     }
 
     private boolean isAllowed(Resource.Action action, String url, String method) {
-        if (!action.getMethod().equalsIgnoreCase(method)) {
+        if (action.getMethods() != null && !action.getMethods().contains(method)) {
             return false;
         }
         return this.pathMatcher.match(action.getUrl(), url);
