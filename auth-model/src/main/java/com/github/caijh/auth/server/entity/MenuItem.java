@@ -28,10 +28,16 @@ public class MenuItem extends BaseEntity<Long> {
 
     private String name;
 
+    /**
+     * 图标.
+     */
     private String icon;
 
     private Long parentId;
 
+    /**
+     * 应用id.
+     */
     private String appId;
 
     /**
