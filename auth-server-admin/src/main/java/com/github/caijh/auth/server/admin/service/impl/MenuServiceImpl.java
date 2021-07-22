@@ -1,5 +1,7 @@
 package com.github.caijh.auth.server.admin.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +50,37 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuItemRepository, MenuIte
         if (Collections.isNotEmpty(menuItems)) {
             this.saveAll(menuItems);
         }
+    }
+
+    @Override
+    public List<MenuItem> getUserMenus(String appId, Long userId) {
+        ClientApp clientApp = this.clientAppService.get(appId);
+        Asserts.notNull(clientApp);
+
+        List<MenuItem> menuItems = this.repository.findByAppId(appId);
+        Map<Long, MenuItem> menuMap = menuItems.stream().collect(Collectors.toMap(MenuItem::getId, e -> e));
+        List<MenuItem> rootMenuItems = new ArrayList<>();
+        menuItems.forEach(e -> {
+            if (e.getParentId() == 0L) {
+                rootMenuItems.add(e);
+            } else {
+                MenuItem parentMenuItem = menuMap.get(e.getParentId());
+                if (parentMenuItem != null) {
+                    Set<MenuItem> children = this.getChildrenMenuItem(parentMenuItem);
+                    children.add(e);
+                    parentMenuItem.setChildren(children);
+                }
+            }
+        });
+
+        // TODO 查找用户所属角色所允许的资源操作
+
+        return rootMenuItems;
+    }
+
+    private Set<MenuItem> getChildrenMenuItem(MenuItem menuItem) {
+        Set<MenuItem> children = menuItem.getChildren();
+        return children != null ? children : new HashSet<>();
     }
 
     private void collectSubMenus(MenuItem menuItem, List<MenuItem> allMenus) {

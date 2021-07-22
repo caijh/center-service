@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import com.github.caijh.auth.server.admin.request.MenuReqBody;
 import com.github.caijh.auth.server.admin.service.MenuService;
 import com.github.caijh.framework.web.controller.BaseController;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,17 @@ public class AppMenuController extends BaseController {
     @PostMapping(value = "/app/{appId}/menu/")
     public void save(@PathVariable String appId, @RequestBody MenuReqBody reqBody) {
         this.menuService.saveAppMenus(appId, reqBody.getItems());
+    }
+
+    /**
+     * 获取用户在应用的菜单.
+     *
+     * @param appId  应用id
+     * @param userId 用户id
+     */
+    @GetMapping(value = "/app/{appId}/user/{userId}/menu")
+    public void userMenus(@PathVariable String appId, @PathVariable Long userId) {
+        this.menuService.getUserMenus(appId, userId);
     }
 
 }
