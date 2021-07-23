@@ -21,4 +21,6 @@ public interface RoleService extends BaseService<Role, Long> {
 
     void saveRoleResources(List<RoleResource> roleResources);
 
+    List<Role> findByAppIdAndUserId(String appId, Long userId);
+
 }

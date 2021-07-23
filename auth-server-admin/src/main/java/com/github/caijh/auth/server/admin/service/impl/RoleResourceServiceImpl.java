@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.caijh.auth.server.admin.repository.RoleResourceRepository;
 import com.github.caijh.auth.server.admin.service.RoleResourceService;
+import com.github.caijh.auth.server.entity.Role;
 import com.github.caijh.auth.server.entity.RoleResource;
 import com.github.caijh.commons.util.Collections;
 import com.github.caijh.framework.data.BaseServiceImpl;
@@ -20,6 +21,11 @@ public class RoleResourceServiceImpl extends BaseServiceImpl<RoleResourceReposit
             return;
         }
         this.repository.deleteByIdNotIn(ids);
+    }
+
+    @Override
+    public List<RoleResource> findByRoleIn(List<Role> roles) {
+        return this.repository.findByRoleIn(roles);
     }
 
 }

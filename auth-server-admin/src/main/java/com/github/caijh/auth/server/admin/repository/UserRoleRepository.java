@@ -9,4 +9,6 @@ public interface UserRoleRepository extends BaseRepository<UserRole, Long> {
 
     void deleteByRoleIdAndUserIdIn(Long roleId, List<Long> userIds);
 
+    List<UserRole> findByUserId(Long userId);
+
 }

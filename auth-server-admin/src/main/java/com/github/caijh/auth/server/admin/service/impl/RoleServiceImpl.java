@@ -18,6 +18,7 @@ import com.github.caijh.auth.server.entity.Role;
 import com.github.caijh.auth.server.entity.RoleResource;
 import com.github.caijh.auth.server.entity.UserRole;
 import com.github.caijh.commons.util.Asserts;
+import com.github.caijh.commons.util.Collections;
 import com.github.caijh.framework.core.exception.BizException;
 import com.github.caijh.framework.core.util.PropertyResolver;
 import com.github.caijh.framework.data.BaseServiceImpl;
@@ -96,6 +97,16 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleRepository, Role, Long>
         this.roleResourceService.deleteByIdNotIn(ids);
 
         this.roleResourceService.saveAll(roleResources);
+    }
+
+    @Override
+    public List<Role> findByAppIdAndUserId(String appId, Long userId) {
+        List<Long> roleIds = this.userRoleService.findByUserId(userId)
+                                                 .stream().map(UserRole::getRoleId).collect(Collectors.toList());
+        if (Collections.isEmpty(roleIds)) {
+            return Collections.emptyList();
+        }
+        return this.repository.findByAppIdAndIdIn(appId, roleIds);
     }
 
 }
