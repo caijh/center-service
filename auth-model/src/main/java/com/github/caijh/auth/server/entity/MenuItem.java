@@ -26,6 +26,9 @@ public class MenuItem extends BaseEntity<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * 菜单名称.
+     */
     private String name;
 
     /**
@@ -33,6 +36,9 @@ public class MenuItem extends BaseEntity<Long> {
      */
     private String icon;
 
+    /**
+     * 上一级菜单.
+     */
     private Long parentId;
 
     /**

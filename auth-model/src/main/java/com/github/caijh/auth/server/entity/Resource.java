@@ -26,6 +26,9 @@ public class Resource extends BaseEntity<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * 资源名称,唯一.
+     */
     @Column(unique = true)
     private String name;
 
@@ -47,6 +50,9 @@ public class Resource extends BaseEntity<Long> {
     public static class Action implements Serializable {
 
         private static final long serialVersionUID = 6867420263442588950L;
+        /**
+         * 操作名称，英文.
+         */
         private String name;
         private String description;
         /**
