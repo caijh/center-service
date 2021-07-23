@@ -50,7 +50,7 @@ public class MenuItem extends BaseEntity<Long> {
      * 对应资源的操作.
      */
     @Type(type = "json")
-    private SelectedResourceAction action;
+    private SelectedResourceAction resourceAction;
 
     /**
      * 子菜单项.

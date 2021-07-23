@@ -99,8 +99,8 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuItemRepository, MenuIte
 
             this.filter(menuItem.getChildren(), map);
 
-            SelectedResource selectedResource = map.get(menuItem.getAction().getResourceId());
-            if (selectedResource == null || !selectedResource.getAllowedActions().contains(menuItem.getAction().getAction())) {
+            SelectedResource selectedResource = map.get(menuItem.getResourceAction().getResourceId());
+            if (selectedResource == null || !selectedResource.getAllowedActions().contains(menuItem.getResourceAction().getAction())) {
                 iterator.remove();
             }
         }
@@ -120,13 +120,13 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuItemRepository, MenuIte
             return;
         }
 
-        Set<Long> resourceIds = menuItem.getChildren().stream().map(e -> e.getAction().getResourceId()).collect(Collectors.toSet());
+        Set<Long> resourceIds = menuItem.getChildren().stream().map(e -> e.getResourceAction().getResourceId()).collect(Collectors.toSet());
         Map<Long, Resource> resourceMap = this.resourceService.findAllById(resourceIds).stream().collect(Collectors.toMap(Resource::getId, e -> e));
         menuItem.getChildren().forEach(e -> {
             e.setAppId(menuItem.getAppId());
             e.setParentId(menuItem.getParentId());
             allMenus.add(e);
-            Asserts.notNull(resourceMap.get(e.getAction().getResourceId()), () -> new BizException("资源id异常"));
+            Asserts.notNull(resourceMap.get(e.getResourceAction().getResourceId()), () -> new BizException("资源id异常"));
             this.collectSubMenus(e, allMenus);
         });
     }
