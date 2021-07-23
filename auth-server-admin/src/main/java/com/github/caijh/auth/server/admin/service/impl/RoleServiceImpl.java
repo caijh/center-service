@@ -100,7 +100,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleRepository, Role, Long>
     }
 
     @Override
-    public List<Role> findByAppIdAndUserId(String appId, Long userId) {
+    public List<Role> listByAppIdAndUserId(String appId, Long userId) {
         List<Long> roleIds = this.userRoleService.findByUserId(userId)
                                                  .stream().map(UserRole::getRoleId).collect(Collectors.toList());
         if (Collections.isEmpty(roleIds)) {

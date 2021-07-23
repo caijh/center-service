@@ -48,7 +48,7 @@ public class ResourceServiceImpl extends BaseServiceImpl<ResourceRepository, Res
 
     @Override
     public List<SelectedResource> findSelectedResource(String appId, Long userId) {
-        List<Role> roles = this.roleService.findByAppIdAndUserId(appId, userId);
+        List<Role> roles = this.roleService.listByAppIdAndUserId(appId, userId);
         Map<Long, SelectedResource> map = Maps.newHashMap();
         this.roleResourceService.findByRoleIn(roles)
                                 .stream()
