@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import com.github.caijh.auth.server.admin.constants.MessageConstants;
-import com.github.caijh.auth.server.admin.repository.RoleRepository;
 import com.github.caijh.auth.server.admin.service.ClientAppService;
 import com.github.caijh.auth.server.admin.service.RoleResourceService;
 import com.github.caijh.auth.server.admin.service.RoleService;
@@ -25,7 +24,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RoleServiceImpl extends BaseServiceImpl<RoleRepository, Role, Long> implements RoleService {
+public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements RoleService {
 
     @Inject
     private ClientAppService clientAppService;

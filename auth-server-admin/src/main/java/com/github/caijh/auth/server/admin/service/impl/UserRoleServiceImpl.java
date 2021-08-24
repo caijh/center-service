@@ -8,11 +8,11 @@ import com.github.caijh.auth.server.admin.service.UserRoleService;
 import com.github.caijh.auth.server.entity.UserRole;
 import com.github.caijh.framework.data.BaseServiceImpl;
 
-public class UserRoleServiceImpl extends BaseServiceImpl<UserRoleRepository, UserRole, Long> implements UserRoleService {
+public class UserRoleServiceImpl extends BaseServiceImpl<UserRole, Long> implements UserRoleService {
 
     @Override
     public void deleteByRoleIdAndUserIdIn(@Nonnull Long roleId, List<Long> userIds) {
-        this.repository.deleteByRoleIdAndUserIdIn(roleId, userIds);
+        this.<UserRoleRepository>getRepository().deleteByRoleIdAndUserIdIn(roleId, userIds);
     }
 
 }

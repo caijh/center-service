@@ -11,7 +11,7 @@ import com.github.caijh.framework.data.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl extends BaseServiceImpl<UserRepository, User, Long> implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<User, Long> implements UserService {
 
     @Transactional
     @Override

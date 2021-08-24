@@ -21,11 +21,12 @@ import com.github.caijh.commons.util.Asserts;
 import com.github.caijh.commons.util.Collections;
 import com.github.caijh.framework.core.exception.BizException;
 import com.github.caijh.framework.data.BaseServiceImpl;
+import com.github.caijh.framework.data.jpa.BaseRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class MenuServiceImpl extends BaseServiceImpl<MenuItemRepository, MenuItem, Long> implements MenuService {
+public class MenuServiceImpl extends BaseServiceImpl<MenuItem, Long> implements MenuService {
 
     @Inject
     private ClientAppService clientAppService;
@@ -57,7 +58,8 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuItemRepository, MenuIte
         ClientApp clientApp = this.clientAppService.get(appId);
         Asserts.notNull(clientApp);
 
-        List<MenuItem> menuItems = this.repository.findByAppId(appId);
+        MenuItemRepository repository = this.getRepository();
+        List<MenuItem> menuItems = repository.findByAppId(appId);
         Map<Long, MenuItem> menuMap = menuItems.stream().collect(Collectors.toMap(MenuItem::getId, e -> e));
         List<MenuItem> rootMenuItems = new ArrayList<>();
         menuItems.forEach(e -> {

@@ -12,14 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class RoleResourceServiceImpl extends BaseServiceImpl<RoleResourceRepository, RoleResource, Long> implements RoleResourceService {
+public class RoleResourceServiceImpl extends BaseServiceImpl<RoleResource, Long> implements RoleResourceService {
 
     @Override
     public void deleteByIdNotIn(List<Long> ids) {
         if (Collections.isEmpty(ids)) {
             return;
         }
-        this.repository.deleteByIdNotIn(ids);
+        this.<RoleResourceRepository>getRepository().deleteByIdNotIn(ids);
     }
 
 }

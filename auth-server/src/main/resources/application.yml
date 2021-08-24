@@ -47,3 +47,6 @@ config:
       4TayRWHQ2ffTiNy50qFEiZTs+n3Rj8WyOxF0YR7RCLZOKdSOVCUbi41oFAKFbsxh
       AQIDAQAB
       -----END PUBLIC KEY-----
+spring:
+  redis:
+    password: redis

@@ -4,14 +4,13 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import com.github.caijh.auth.server.admin.constants.MessageConstants;
-import com.github.caijh.auth.server.admin.repository.ResourceRepository;
 import com.github.caijh.auth.server.admin.service.ResourceService;
 import com.github.caijh.auth.server.entity.Resource;
 import com.github.caijh.commons.util.Asserts;
 import com.github.caijh.framework.core.exception.BizException;
 import com.github.caijh.framework.data.BaseServiceImpl;
 
-public class ResourceServiceImpl extends BaseServiceImpl<ResourceRepository, Resource, Long> implements ResourceService {
+public class ResourceServiceImpl extends BaseServiceImpl<Resource, Long> implements ResourceService {
 
     @Override
     public void add(Resource resource) {
