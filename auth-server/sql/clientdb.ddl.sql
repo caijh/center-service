@@ -90,7 +90,7 @@ CREATE TABLE `men_item` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `name` varchar(20) NOT NULL COMMENT '菜单名称、标题',
   `icon` varchar(100) DEFAULT NULL COMMENT '图标',
-  `action` json DEFAULT NULL COMMENT '菜单的action',
+  `resource_action` json DEFAULT NULL COMMENT '菜单的action',
   `parent_id` bigint unsigned DEFAULT '0' COMMENT '上一级id',
   `app_id` varchar(255) NOT NULL COMMENT '所属应用',
   PRIMARY KEY (`id`),

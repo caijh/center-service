@@ -2,6 +2,7 @@ package com.github.caijh.auth.server.admin.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -17,16 +18,16 @@ import com.github.caijh.auth.server.entity.ClientApp;
 import com.github.caijh.auth.server.entity.MenuItem;
 import com.github.caijh.auth.server.entity.Resource;
 import com.github.caijh.auth.server.model.RootMenuItem;
+import com.github.caijh.auth.server.model.SelectedResource;
 import com.github.caijh.commons.util.Asserts;
 import com.github.caijh.commons.util.Collections;
 import com.github.caijh.framework.core.exception.BizException;
 import com.github.caijh.framework.data.BaseServiceImpl;
-import com.github.caijh.framework.data.jpa.BaseRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class MenuServiceImpl extends BaseServiceImpl<MenuItem, Long> implements MenuService {
+public class MenuServiceImpl extends BaseServiceImpl<MenuItemRepository, MenuItem, Long> implements MenuService {
 
     @Inject
     private ClientAppService clientAppService;
@@ -58,11 +59,10 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuItem, Long> implements 
         ClientApp clientApp = this.clientAppService.get(appId);
         Asserts.notNull(clientApp);
 
-        MenuItemRepository repository = this.getRepository();
-        List<MenuItem> menuItems = repository.findByAppId(appId);
-        Map<Long, MenuItem> menuMap = menuItems.stream().collect(Collectors.toMap(MenuItem::getId, e -> e));
-        List<MenuItem> rootMenuItems = new ArrayList<>();
-        menuItems.forEach(e -> {
+        Map<Long, MenuItem> menuMap = this.repository.findByAppId(appId).stream()
+                                                     .collect(Collectors.toMap(MenuItem::getId, e -> e));
+        Set<MenuItem> rootMenuItems = new HashSet<>();
+        this.repository.findByAppId(appId).forEach(e -> {
             if (e.getParentId() == 0L) {
                 rootMenuItems.add(e);
             } else {
@@ -70,19 +70,49 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuItem, Long> implements 
                 if (parentMenuItem != null) {
                     Set<MenuItem> children = this.getChildrenMenuItem(parentMenuItem);
                     children.add(e);
-                    parentMenuItem.setChildren(children);
                 }
             }
         });
 
-        // TODO 查找用户所属角色所允许的资源操作
+        List<SelectedResource> selectedResource = this.resourceService.findSelectedResource(appId, userId);
 
-        return rootMenuItems;
+        Map<Long, SelectedResource> map = selectedResource.stream().collect(Collectors.toMap(e -> e.getResource().getId(), e -> e));
+
+        this.filter(rootMenuItems, map);
+
+        return new ArrayList<>(rootMenuItems);
+    }
+
+    /**
+     * 根据用户在应用内可操作资源映射过滤菜单.
+     *
+     * @param menuItems 菜单集合
+     * @param map       用户在应用内可操作资源映射
+     */
+    private void filter(Set<MenuItem> menuItems, Map<Long, SelectedResource> map) {
+        if (Collections.isEmpty(menuItems)) {
+            return;
+        }
+        Iterator<MenuItem> iterator = menuItems.iterator();
+        while (iterator.hasNext()) {
+            MenuItem menuItem = iterator.next();
+
+            this.filter(menuItem.getChildren(), map);
+
+            SelectedResource selectedResource = map.get(menuItem.getResourceAction().getResourceId());
+            if (selectedResource == null || !selectedResource.getAllowedActions().contains(menuItem.getResourceAction().getAction())) {
+                iterator.remove();
+            }
+        }
     }
 
     private Set<MenuItem> getChildrenMenuItem(MenuItem menuItem) {
         Set<MenuItem> children = menuItem.getChildren();
-        return children != null ? children : new HashSet<>();
+        if (children == null) {
+            children = new HashSet<>();
+            menuItem.setChildren(children);
+        }
+        return menuItem.getChildren();
     }
 
     private void collectSubMenus(MenuItem menuItem, List<MenuItem> allMenus) {
@@ -90,13 +120,13 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuItem, Long> implements 
             return;
         }
 
-        Set<Long> resourceIds = menuItem.getChildren().stream().map(e -> e.getAction().getResourceId()).collect(Collectors.toSet());
+        Set<Long> resourceIds = menuItem.getChildren().stream().map(e -> e.getResourceAction().getResourceId()).collect(Collectors.toSet());
         Map<Long, Resource> resourceMap = this.resourceService.findAllById(resourceIds).stream().collect(Collectors.toMap(Resource::getId, e -> e));
         menuItem.getChildren().forEach(e -> {
             e.setAppId(menuItem.getAppId());
             e.setParentId(menuItem.getParentId());
             allMenus.add(e);
-            Asserts.notNull(resourceMap.get(e.getAction().getResourceId()), () -> new BizException("资源id异常"));
+            Asserts.notNull(resourceMap.get(e.getResourceAction().getResourceId()), () -> new BizException("资源id异常"));
             this.collectSubMenus(e, allMenus);
         });
     }
