@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import com.github.caijh.auth.server.admin.constants.MessageConstants;
+import com.github.caijh.auth.server.admin.repository.RoleRepository;
 import com.github.caijh.auth.server.admin.service.ClientAppService;
 import com.github.caijh.auth.server.admin.service.RoleResourceService;
 import com.github.caijh.auth.server.admin.service.RoleService;
@@ -105,7 +106,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements Role
         if (Collections.isEmpty(roleIds)) {
             return Collections.emptyList();
         }
-        return this.repository.findByAppIdAndIdIn(appId, roleIds);
+        return this.<RoleRepository>getRepository().findByAppIdAndIdIn(appId, roleIds);
     }
 
 }

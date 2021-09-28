@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class MenuServiceImpl extends BaseServiceImpl<MenuItemRepository, MenuItem, Long> implements MenuService {
+public class MenuServiceImpl extends BaseServiceImpl<MenuItem, Long> implements MenuService {
 
     @Inject
     private ClientAppService clientAppService;
@@ -59,10 +59,10 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuItemRepository, MenuIte
         ClientApp clientApp = this.clientAppService.get(appId);
         Asserts.notNull(clientApp);
 
-        Map<Long, MenuItem> menuMap = this.repository.findByAppId(appId).stream()
+        Map<Long, MenuItem> menuMap = this.<MenuItemRepository>getRepository().findByAppId(appId).stream()
                                                      .collect(Collectors.toMap(MenuItem::getId, e -> e));
         Set<MenuItem> rootMenuItems = new HashSet<>();
-        this.repository.findByAppId(appId).forEach(e -> {
+        this.<MenuItemRepository>getRepository().findByAppId(appId).forEach(e -> {
             if (e.getParentId() == 0L) {
                 rootMenuItems.add(e);
             } else {

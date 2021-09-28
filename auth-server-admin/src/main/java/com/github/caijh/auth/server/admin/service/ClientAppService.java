@@ -1,10 +1,11 @@
 package com.github.caijh.auth.server.admin.service;
 
 import com.github.caijh.auth.server.entity.ClientApp;
+import com.github.caijh.framework.data.BaseService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface ClientAppService {
+public interface ClientAppService extends BaseService<ClientApp, String> {
 
     ClientApp add(ClientApp clientApp);
 

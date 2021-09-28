@@ -3,5 +3,12 @@ MYSQL_PORT: 3306
 MYSQL_DB: clientdb
 MYSQL_USER: root
 MYSQL_PASSWORD: 123456
+
 server:
-  port: 8001
+  port: 8080
+spring:
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  redis:
+    host: 127.0.0.1

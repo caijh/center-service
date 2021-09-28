@@ -10,16 +10,16 @@ import com.github.caijh.framework.data.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserRoleServiceImpl extends BaseServiceImpl<UserRoleRepository, UserRole, Long> implements UserRoleService {
+public class UserRoleServiceImpl extends BaseServiceImpl<UserRole, Long> implements UserRoleService {
 
     @Override
     public void deleteByRoleIdAndUserIdIn(@Nonnull Long roleId, List<Long> userIds) {
-        this.repository.deleteByRoleIdAndUserIdIn(roleId, userIds);
+        this.<UserRoleRepository>getRepository().deleteByRoleIdAndUserIdIn(roleId, userIds);
     }
 
     @Override
     public List<UserRole> findByUserId(Long userId) {
-        return this.repository.findByUserId(userId);
+        return this.<UserRoleRepository>getRepository().findByUserId(userId);
     }
 
 }

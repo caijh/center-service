@@ -25,7 +25,7 @@ public class RoleResourceServiceImpl extends BaseServiceImpl<RoleResource, Long>
 
     @Override
     public List<RoleResource> findByRoleIn(List<Role> roles) {
-        return this.repository.findByRoleIn(roles);
+        return this.<RoleResourceRepository>getRepository().findByRoleIn(roles);
     }
 
 }

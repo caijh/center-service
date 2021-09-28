@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import com.github.caijh.auth.server.admin.constants.MessageConstants;
-import com.github.caijh.auth.server.admin.repository.ResourceRepository;
 import com.github.caijh.auth.server.admin.service.ResourceService;
 import com.github.caijh.auth.server.admin.service.RoleResourceService;
 import com.github.caijh.auth.server.admin.service.RoleService;
@@ -25,7 +24,7 @@ import com.google.common.collect.Maps;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ResourceServiceImpl extends BaseServiceImpl<ResourceRepository, Resource, Long> implements ResourceService {
+public class ResourceServiceImpl extends BaseServiceImpl<Resource, Long> implements ResourceService {
 
     @Inject
     private RoleService roleService;
